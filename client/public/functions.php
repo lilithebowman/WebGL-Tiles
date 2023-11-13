@@ -30,11 +30,11 @@
 		$error = null;
 
 		if (! defined( 'WPGRAPHQL_VERSION' ) ) {
-			$error = new WP_Error( 'missing_dependency', sprintf( __( "WPGraphQL must be installed and activated to use the %s theme", "example" ), THEME_NAME ) );
+			//$error = new WP_Error( 'missing_dependency', sprintf( __( "WPGraphQL must be installed and activated to use the %s theme", "example" ), THEME_NAME ) );
 		} 
 
 		if (! defined( 'WPGRAPHQL_JWT_AUTHENTICATION_VERSION' ) ) {
-			$error = new WP_Error( 'missing_dependency', sprintf( __( "WPGraphQL JWT Authentication must be installed and activated to use the %s theme", "example" ), THEME_NAME ) );
+			//$error = new WP_Error( 'missing_dependency', sprintf( __( "WPGraphQL JWT Authentication must be installed and activated to use the %s theme", "example" ), THEME_NAME ) );
 		}
 
 		if ( is_wp_error( $error ) ) {
