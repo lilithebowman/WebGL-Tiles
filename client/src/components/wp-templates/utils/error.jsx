@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash'
-import { Container as DefaultContainer, Row, Col } from 'reactstrap';
+import { Container as DefaultContainer, Row, Col } from 'bootstrap';
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core'

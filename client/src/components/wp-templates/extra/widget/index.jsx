@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { Container, Row } from 'reactstrap';
+import { Container, Row } from 'bootstrap';
 
 import { Error, Loading, wrapper } from 'components/wp-templates/';
 import getWidgetQuery from './query';

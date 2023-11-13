@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { v4 } from 'uuid';
-import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
+import { Button, Form, FormGroup, FormText, Input, Label } from 'bootstrap';
 import { Mutation } from 'react-apollo';
 
 import { LOGIN_MUTATION } from './query';

@@ -2,10 +2,10 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Link } from 'react-router-dom'
-import { Parser as ReactParser } from 'html-to-react';
-import { Col } from 'reactstrap';
+// import { Parser as ReactParser } from 'html-to-react';
+import { Col } from 'bootstrap';
 
-const parser = new ReactParser();
+// const parser = new ReactParser();
 
 /**
  * Renders list of taxonomy links
@@ -67,7 +67,7 @@ class PostView extends Component {
 
     return (
       <div className={`entry-content${isGutenPost ? ' guten-content' : ''}`}>
-        {parser.parse(excerpt || content)}
+        {excerpt || content}
       </div>
     );
   }

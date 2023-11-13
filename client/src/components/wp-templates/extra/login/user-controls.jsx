@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button } from 'bootstrap';
 
 import { VIEWER_QUERY } from './query'
 import { Error, Loading } from 'components/wp-templates';

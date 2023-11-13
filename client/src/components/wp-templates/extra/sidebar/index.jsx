@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { Col } from 'reactstrap';
+import { Col } from 'bootstrap';
 
 import { Error, Loading, Widget } from 'components/wp-templates';
 import SIDEBAR_QUERY from './query';

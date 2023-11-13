@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Parser as ReactParser } from 'html-to-react';
+// import { Parser as ReactParser } from 'html-to-react';
 import { Query } from 'react-apollo';
-import { Col } from 'reactstrap';
+import { Col } from 'bootstrap';
 
 import { Error, Loading } from 'components/wp-templates';
 import getQueryProps from './query';
@@ -18,14 +18,14 @@ class Page extends Component {
             <Error fault="query" debugMsg={error.message} as={Col} className="post" />
           );
 
-          const parser = new ReactParser();
+          // const parser = new ReactParser();
           const { page, pageBy } = data;
 
           if ( page || pageBy ) {
             const { title, content } = page || pageBy;
             return (
               <Col className="post page">
-                <div className="entry-content">{parser.parse(content)}</div>
+                <div className="entry-content">{content}</div>
               </Col>
             );
           }

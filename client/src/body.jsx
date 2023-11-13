@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withApollo, Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Container, Row, Col } from 'reactstrap';
 import { BrowserView } from 'react-device-detect';
+import { Container, Row, Col } from 'bootstrap';
 
 import { WPCore, WPRouter, WPTemplates } from './components';
 

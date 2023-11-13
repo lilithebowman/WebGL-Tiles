@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Button, Col, Collapse, Container, Row } from 'reactstrap';
+import { Button, Col, Collapse, Row } from 'bootstrap';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
