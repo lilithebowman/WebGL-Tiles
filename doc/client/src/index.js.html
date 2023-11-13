@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\src\\index.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Theme Starting Point</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> { BrowserRouter <span class="hljs-keyword">as</span> Router } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;
+<span class="hljs-keyword">import</span> { ApolloProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-apollo'</span>;
+<span class="hljs-keyword">import</span> ApolloClient <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-client'</span>;
+<span class="hljs-keyword">import</span> { ApolloLink, concat } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-link'</span>;
+<span class="hljs-keyword">import</span> { HttpLink } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-link-http'</span>;
+<span class="hljs-keyword">import</span> { InMemoryCache } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-cache-inmemory'</span>;
+<span class="hljs-keyword">import</span> registerServiceWorker <span class="hljs-keyword">from</span> <span class="hljs-string">'./registerServiceWorker'</span>;
+
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./app'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Retrieve GraphQL Endpoint</p>
+</div>
+<div class="body">
+<p>Endpoint retrieved from WordPress on production, but
+must be provided manually for Webpack Dev Server.</p>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Delete window.endpoint and span#graphql as a security measure</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> graphqlDOM = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#graphql'</span>);
+<span class="hljs-keyword">let</span> endpoint;
+<span class="hljs-keyword">if</span> (graphqlDOM) {
+  endpoint = graphqlDOM.getAttribute(<span class="hljs-string">'data-endpoint'</span>);
+  graphqlDOM.parentElement.removeChild(graphqlDOM);
+}
+<span class="hljs-keyword">const</span> httpLink = <span class="hljs-keyword">new</span> HttpLink({
+  <span class="hljs-attr">uri</span>: (process.env.REACT_APP_APOLLO_CLIENT_URI) ? 
+    process.env.REACT_APP_APOLLO_CLIENT_URI : endpoint,
+  <span class="hljs-attr">credentials</span>: <span class="hljs-string">'same-origin'</span>,
+});
+
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Add the authorization to the headers</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> authMiddleware = <span class="hljs-keyword">new</span> ApolloLink(<span class="hljs-function">(<span class="hljs-params">operation, forward</span>) =&gt;</span> {
+  operation.setContext({
+    <span class="hljs-attr">headers</span>: {
+      <span class="hljs-attr">authorization</span>: localStorage.getItem(<span class="hljs-string">'user-token'</span>) || <span class="hljs-literal">null</span>,
+    } 
+  });
+
+  <span class="hljs-keyword">return</span> forward(operation);
+});
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> ApolloClient({
+  <span class="hljs-attr">link</span>: concat(authMiddleware, httpLink),
+  <span class="hljs-attr">cache</span>: <span class="hljs-keyword">new</span> InMemoryCache({
+    <span class="hljs-attr">dataIdFromObject</span>: <span class="hljs-function"><span class="hljs-params">object</span> =&gt;</span> object.id || <span class="hljs-literal">null</span>
+  }),
+});
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Get app container ID attribute</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> appContainer = <span class="hljs-built_in">document</span>.getElementById((process.env.NODE_ENV === <span class="hljs-string">'production'</span>) ? <span class="hljs-string">'page'</span> : <span class="hljs-string">'root'</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Render App to #root</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">ReactDOM.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ApolloProvider</span> <span class="hljs-attr">client</span>=<span class="hljs-string">{client}</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ApolloProvider</span>&gt;</span></span>,
+  appContainer,
+);
+
+appContainer.classList.add(<span class="hljs-string">'loaded'</span>);
+
+registerServiceWorker();
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

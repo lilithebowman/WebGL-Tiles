@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>query.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../doc-style.css" />
+  <script src="../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../";
+    var thisFile = "client\\src\\components\\wp-templates\\search\\query.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>query.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">import</span> { gql } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-boost'</span>;
+
+<span class="hljs-keyword">const</span> PAGES = <span class="hljs-string">`
+  pages( first: $limit, where: {search: $input } ){
+    nodes {
+      id
+      pageId
+      content
+      title
+      permalink
+    }
+  }
+`</span>;
+
+<span class="hljs-keyword">const</span> POSTS = <span class="hljs-string">`
+  posts( first: $limit, where: {search: $input } ){
+    nodes {
+      id
+      postId
+      content
+      title
+      permalink
+      tags{ nodes{ id name } }
+      categories{ nodes{ id name } }
+      featuredImage{ id altText sourceUrl }
+    }
+  }
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (input, filter, limit) =&gt; {
+  <span class="hljs-keyword">let</span> queryString;
+  <span class="hljs-keyword">switch</span>(filter) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'page'</span>:
+      queryString = <span class="hljs-string">`<span class="hljs-subst">${PAGES}</span>`</span>
+      <span class="hljs-keyword">break</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'post'</span>:
+      queryString = <span class="hljs-string">`<span class="hljs-subst">${POSTS}</span>`</span>
+      <span class="hljs-keyword">break</span>;
+
+    <span class="hljs-keyword">default</span>:
+      queryString = <span class="hljs-string">`<span class="hljs-subst">${POSTS}</span><span class="hljs-subst">${PAGES}</span>`</span>
+  }
+
+  queryString = <span class="hljs-string">`
+  query SearchQuery($limit: Int!, $input: String!) {
+    <span class="hljs-subst">${queryString}</span>
+  }`</span>
+
+  <span class="hljs-keyword">return</span> { <span class="hljs-attr">query</span>: gql<span class="hljs-string">`<span class="hljs-subst">${queryString}</span>`</span>, <span class="hljs-attr">variables</span>: { input, limit } };
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

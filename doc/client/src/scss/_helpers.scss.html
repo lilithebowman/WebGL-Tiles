@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>_helpers.scss</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\src\\scss\\_helpers.scss";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>_helpers.scss</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Helpers</p>
+</div>
+<div class="body">
+</div>
+</div>
+min-size
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss"><span class="hljs-variable">$min-width-slug</span>: <span class="hljs-string">'mnw'</span> !default;
+<span class="hljs-variable">$min-height-slug</span>: <span class="hljs-string">'mnh'</span> !default;
+
+<span class="hljs-keyword">@for</span> <span class="hljs-variable">$i</span> from <span class="hljs-number">0</span> through <span class="hljs-number">100</span> {
+  .#{<span class="hljs-variable">$min-width-slug</span>}-#{<span class="hljs-variable">$i</span>} {
+    <span class="hljs-attribute">min-width</span>: <span class="hljs-number">0%</span> + <span class="hljs-variable">$i</span>;
+  }
+
+  .#{<span class="hljs-variable">$min-height-slug</span>}-#{<span class="hljs-variable">$i</span>} {
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">0%</span> + <span class="hljs-variable">$i</span>;
+  }
+
+  .#{<span class="hljs-variable">$min-width-slug</span>}-#{<span class="hljs-variable">$i</span>}vw {
+    <span class="hljs-attribute">min-width</span>: <span class="hljs-number">0vh</span> + <span class="hljs-variable">$i</span>;
+  }
+
+  .#{<span class="hljs-variable">$min-height-slug</span>}-#{<span class="hljs-variable">$i</span>}vh {
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">0vh</span> + <span class="hljs-variable">$i</span>;
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

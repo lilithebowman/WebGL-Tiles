@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WidgetConnectionDefinition.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../../doc-style.css" />
+  <script src="../../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\Widget\\Connection\\WidgetConnectionDefinition.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>WidgetConnectionDefinition.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">Connection</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">CustomTypes</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">ExtraSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">WPInputObjectType</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class WidgetConnectionDefinition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WidgetConnectionDefinition</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the Relay connection for Widget</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $connection = [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the where_args Input Object Type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $where_args;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the fields for the $where_args</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $where_fields;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Create the Relay connection for Widgets.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$from_type Connection type.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connection</span><span class="hljs-params">( $from_type = <span class="hljs-string">'Root'</span> )</span> </span>{
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$connection[ $from_type ] ) ) {
+
+			$type_name = <span class="hljs-string">'Widgets'</span>;
+
+			$connection = Relay::connectionDefinitions( [
+				<span class="hljs-string">'nodeType'</span> =&gt; CustomTypes::widget(),
+				<span class="hljs-string">'name'</span>     =&gt; ucfirst( $from_type ) . $type_name,
+				<span class="hljs-string">'connectionFields'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> [
+						<span class="hljs-string">'nodes'</span> =&gt; [
+							<span class="hljs-string">'type'</span>        =&gt; Types::list_of( CustomTypes::widget() ),
+							<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The nodes of the connection, without the edges'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+							<span class="hljs-string">'resolve'</span>     =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, $args, $context, $info )</span> </span>{
+								<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $source[<span class="hljs-string">'nodes'</span>] ) ? $source[<span class="hljs-string">'nodes'</span>] : [];
+							},
+						],
+					];
+				},
+			] );
+
+			$args = [
+				<span class="hljs-string">'where'</span> =&gt; [
+					<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'where'</span>,
+					<span class="hljs-string">'type'</span> =&gt; <span class="hljs-keyword">self</span>::where_args( $type_name ),
+				],
+			];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Add the connection to the widgets_connection object</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			$connection_name 								= ucfirst( $from_type ) . $type_name;
+			<span class="hljs-keyword">self</span>::$connection[ $from_type ] = [
+				<span class="hljs-string">'type'</span>        =&gt; $connection[<span class="hljs-string">'connectionType'</span>],
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<p>Translators: the placeholder is the name of the post_type</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">				<span class="hljs-string">'description'</span> =&gt; sprintf( __( <span class="hljs-string">'A collection of %s objects'</span>, <span class="hljs-string">'wp-graphql'</span> ), $type_name ),
+				<span class="hljs-string">'args'</span>        =&gt; array_merge( Relay::connectionArgs(), $args ),
+				<span class="hljs-string">'resolve'</span>     =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, $args, $context, $info )</span> </span>{
+					<span class="hljs-keyword">return</span> ExtraSource::resolve_widgets_connection( $source, $args, $context, $info );
+				},
+			];
+		}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return the connection from the post_objects_connection object</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		<span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$connection[ $from_type ];
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the &quot;where&quot; args that can be used to query menuItems</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>WPInputObjectType
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">where_args</span><span class="hljs-params">( $type_name )</span> </span>{
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$where_args ) {
+			
+			<span class="hljs-keyword">self</span>::$where_args = <span class="hljs-keyword">new</span> WPInputObjectType( [
+				<span class="hljs-string">'name'</span>   =&gt; $type_name . <span class="hljs-string">'QueryArgs'</span>,
+				<span class="hljs-string">'fields'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-title">use</span> <span class="hljs-params">( $type_name )</span> </span>{
+					<span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::where_fields( $type_name . <span class="hljs-string">'QueryArgs'</span> );
+				},
+			] );
+		}
+
+		<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$where_args ) ? <span class="hljs-keyword">self</span>::$where_args : <span class="hljs-keyword">null</span>;
+
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This defines the fields to be used in the $where_args input type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">where_fields</span><span class="hljs-params">( $type_name )</span> </span>{
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$where_fields ) {
+			$fields = [
+				<span class="hljs-string">'id'</span> =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::int(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The instance ID of the widget'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				],
+				<span class="hljs-string">'name'</span> =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::string(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'Display name of the widget'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				],
+				<span class="hljs-string">'basename'</span> =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::string(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'Display name of the widget'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				],
+			];
+
+			<span class="hljs-keyword">self</span>::$where_fields = WPInputObjectType::prepare_fields( $fields, $type_name );
+		}
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$where_fields;
+	}
+
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

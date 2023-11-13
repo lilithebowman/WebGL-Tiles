@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DataSource.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../doc-style.css" />
+  <script src="../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Data\\DataSource.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>DataSource.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+  <span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>;
+
+  <span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Error</span>\<span class="hljs-title">UserError</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>\<span class="hljs-title">Connection</span>\<span class="hljs-title">SidebarConnectionResolver</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">Connection</span>\<span class="hljs-title">WidgetConnectionResolver</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class ExtraSource
+Meant to serve an a extension of WPGraphQL\Data\DataSource</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExtraSource</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Retrieves and formats theme modification data</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array|null</span>
+<span>$theme_mods - array of raw theme modification data
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_theme_mods_data</span><span class="hljs-params">()</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Output array</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $theme_mod_data = [];
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Loop through raw active theme mods array and format theme mod data</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      
+      $theme_mods = get_theme_mods();
+      <span class="hljs-keyword">foreach</span>( $theme_mods <span class="hljs-keyword">as</span> $mod_name =&gt; $mod_data ){
+        <span class="hljs-keyword">if</span>( gettype($mod_name) === <span class="hljs-string">'integer'</span> ) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">switch</span>( $mod_name ) {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Custom CSS Post Id</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          <span class="hljs-keyword">case</span> <span class="hljs-string">'custom_css_post_id'</span>:
+            $theme_mod_data[ $mod_name ] = absint($mod_data);
+            <span class="hljs-keyword">break</span>;
+          
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Background</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_preset'</span>:
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_size'</span>:
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_repeat'</span>:
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_attachment'</span>:
+            $key = str_replace(<span class="hljs-string">'background_'</span>, <span class="hljs-string">''</span>, $mod_name );
+            $theme_mod_data[ <span class="hljs-string">'background'</span> ][ $key ] = $mod_data;
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_image'</span>:
+            $theme_mod_data[ <span class="hljs-string">'background'</span> ][<span class="hljs-string">'id'</span>] = attachment_url_to_postid( (string) $mod_data );
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'background_color'</span>:
+            $theme_mod_data[ $mod_name ] =  (string) $mod_data;
+            <span class="hljs-keyword">break</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Custom Logo</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          <span class="hljs-keyword">case</span> <span class="hljs-string">'custom_logo'</span>:
+            $theme_mod_data[ $mod_name ] = absint( $mod_data );
+            <span class="hljs-keyword">break</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Header Image</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          <span class="hljs-keyword">case</span> <span class="hljs-string">'header_image_data'</span>:
+            $theme_mod_data[ <span class="hljs-string">'header_image'</span> ] += get_object_vars( $mod_data );
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'header_image'</span>:
+            $theme_mod_data[ <span class="hljs-string">'header_image'</span> ][<span class="hljs-string">'id'</span>] = attachment_url_to_postid( (string) $mod_data );
+            <span class="hljs-keyword">break</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Nav Menu Locations and Custom Mods</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          <span class="hljs-keyword">default</span>:
+            $theme_mod_data[ $mod_name ] = $mod_data;
+        }
+      }
+      <span class="hljs-keyword">return</span> $theme_mod_data;
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns an array of data about the sidebar you are requesting</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$name Name of the sidebar you want info for
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>null|array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_sidebar</span><span class="hljs-params">( $sidebar_id, $index = null )</span> </span>{
+      <span class="hljs-keyword">global</span> $wp_registered_sidebars;
+
+      <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $wp_registered_sidebars ) ) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UserError( sprintf( __( <span class="hljs-string">'No sidebars are registered'</span>, <span class="hljs-string">'wp-graphql'</span> ), $index ) );
+      }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Get registered sidebar data</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $sidebar = <span class="hljs-keyword">null</span>;
+      <span class="hljs-keyword">if</span> ( ! is_null( $index ) ) {
+
+        <span class="hljs-keyword">foreach</span>( $wp_registered_sidebars <span class="hljs-keyword">as</span> $registered_sidebar ) {
+          <span class="hljs-keyword">if</span>( $registered_sidebar[ $index ] === $sidebar_id ) {
+            $sidebar = $registered_sidebar;
+            <span class="hljs-keyword">break</span>;
+          }
+        }
+        <span class="hljs-keyword">if</span>( ! $sidebar ) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UserError( sprintf( __( <span class="hljs-string">'No sidebar was found with that %s'</span>, <span class="hljs-string">'wp-graphql'</span> ), $index ) );
+        }
+
+      } <span class="hljs-keyword">else</span> {
+        
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Throw if requested sidebar not found</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        <span class="hljs-keyword">if</span>( ! array_key_exists( $sidebar_id, $wp_registered_sidebars ) ) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UserError( sprintf( __( <span class="hljs-string">'No sidebar was found with that sidebar_id'</span>, <span class="hljs-string">'wp-graphql'</span> ) ) );
+        }
+        $sidebar = $wp_registered_sidebars[ $sidebar_id ];
+
+      }
+      
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>for nodeDefinitions</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $sidebar[ <span class="hljs-string">'is_sidebar'</span> ] = <span class="hljs-keyword">true</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return requested sidebar array</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">return</span> $sidebar;
+
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Wrapper for SidebarConnectionResolver::resolve</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$source sidebar object
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$args Array of arguments to pass to reolve method
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">AppContext</span>
+<span>$context AppContext object passed down
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">ResolveInfo</span>
+<span>$info The ResolveInfo object
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_sidebars_connection</span><span class="hljs-params">( $source, array $args, AppContext $context, ResolveInfo $info )</span> </span>{
+      <span class="hljs-keyword">return</span> SidebarConnectionResolver::resolve( $source, $args, $context, $info );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns an array of data about the widget you are requesting</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$name Name of the sidebar you want info for
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>null|array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_widget</span><span class="hljs-params">( $widget_id, $index = null )</span> </span>{
+      <span class="hljs-keyword">global</span> $wp_registered_widgets;
+
+      $id = <span class="hljs-keyword">null</span>;
+      <span class="hljs-keyword">if</span> ( ! is_null( $index ) ) {
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Loop through registered widget and compare index value</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        <span class="hljs-keyword">foreach</span>( $wp_registered_widgets <span class="hljs-keyword">as</span> $key =&gt; $registered_widget ) {
+          <span class="hljs-keyword">if</span>( $registered_widget[ $index ] === $widget_id ) {
+            $id = $key;
+            <span class="hljs-keyword">break</span>;
+          }
+        }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Throw if requested widget not found</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        <span class="hljs-keyword">if</span>( ! $id ) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UserError( sprintf( __( <span class="hljs-string">'No widget was found with that %s'</span>, <span class="hljs-string">'wp-graphql'</span> ), $index ) );
+        }
+
+      } <span class="hljs-keyword">else</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Throw if requested widget not found</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        <span class="hljs-keyword">if</span>( ! array_key_exists( $widget_id, $wp_registered_widgets ) ) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UserError( sprintf( __( <span class="hljs-string">'No widget was found with the that ID'</span>, <span class="hljs-string">'wp-graphql'</span> ) ) );
+        }
+
+        $id = $widget_id;
+
+      }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return requested widget data object</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::create_widget_data_object( $wp_registered_widgets[ $id ] );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Wrapper for WidgetConnectionResolver::resolve</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$source sidebar object
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$args Array of arguments to pass to reolve method
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">AppContext</span>
+<span>$context AppContext object passed down
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">ResolveInfo</span>
+<span>$info The ResolveInfo object
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_widgets_connection</span><span class="hljs-params">( $source, array $args, AppContext $context, ResolveInfo $info )</span> </span>{
+      <span class="hljs-keyword">return</span> WidgetConnectionResolver::resolve( $source, $args, $context, $info );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Create widget data</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$widget
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create_widget_data_object</span><span class="hljs-params">( $widget )</span> </span>{
+      $widget_data = [
+        <span class="hljs-string">'id'</span> =&gt; $widget[<span class="hljs-string">'id'</span>],
+        <span class="hljs-string">'name'</span> =&gt; $widget[<span class="hljs-string">'name'</span>],
+        <span class="hljs-string">'widget_description'</span> =&gt; ( ! <span class="hljs-keyword">empty</span>( $widget[<span class="hljs-string">'description'</span>] ) ) ? $widget[<span class="hljs-string">'description'</span>] : <span class="hljs-string">''</span>,
+        <span class="hljs-string">'type'</span> =&gt; $widget[<span class="hljs-string">'callback'</span>][<span class="hljs-number">0</span>]-&gt;id_base,
+        <span class="hljs-string">'is_widget'</span> =&gt; <span class="hljs-keyword">true</span>,
+      ];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-24" id="section-24"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The name of the option in the database is the name of the widget class.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $option_name = $widget[<span class="hljs-string">'callback'</span>][<span class="hljs-number">0</span>]-&gt;option_name;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Widget data is stored as an associative array. To get the right data we need to get the right key
+which is stored in $wp_registered_widgets</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $key = $widget[<span class="hljs-string">'params'</span>][<span class="hljs-number">0</span>][<span class="hljs-string">'number'</span>];
+      
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-26" id="section-26"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Retrieve widget data if exist</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">if</span>( $key &gt; <span class="hljs-number">-1</span> ) {
+        $widget_data += get_option( $option_name )[ $key ];
+      }
+
+      <span class="hljs-keyword">return</span> $widget_data;
+    }
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-27" id="section-27"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return an array of data for all active widget types</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_active_widget_types</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">global</span> $wp_registered_widgets;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-28" id="section-28"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the query data to return</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $types = [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-29" id="section-29"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Loop through registered widgets</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">foreach</span>( $wp_registered_widgets <span class="hljs-keyword">as</span> $widget ) {
+        $widget_data = <span class="hljs-keyword">self</span>::create_widget_data_object( $widget );
+        $type = $widget_data[<span class="hljs-string">'type'</span>];
+        <span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span>( $types[$type] ) ) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">unset</span>( $widget_data[<span class="hljs-string">'id'</span>] );
+        <span class="hljs-keyword">unset</span>( $widget_data[<span class="hljs-string">'name'</span>] );
+        <span class="hljs-keyword">unset</span>( $widget_data[<span class="hljs-string">'type'</span>] );
+        <span class="hljs-keyword">unset</span>( $widget_data[<span class="hljs-string">'is_widget'</span>] );
+        
+        $types[$type] = $widget_data;
+      }
+
+      <span class="hljs-keyword">return</span> $types;
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-30" id="section-30"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns an array of archive urls base of type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$type - grouping style
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">bool</span>
+<span>$full - returns full url if true
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_archive_urls</span><span class="hljs-params">( $type = <span class="hljs-string">'monthly'</span>, $full = false )</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-31" id="section-31"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Get raw archives output</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $args = <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'type'</span>            =&gt; $type,
+        <span class="hljs-string">'limit'</span>           =&gt; <span class="hljs-string">''</span>,
+        <span class="hljs-string">'format'</span>          =&gt; <span class="hljs-string">'option'</span>, 
+        <span class="hljs-string">'before'</span>          =&gt; <span class="hljs-string">''</span>,
+        <span class="hljs-string">'after'</span>           =&gt; <span class="hljs-string">''</span>,
+        <span class="hljs-string">'show_post_count'</span> =&gt; <span class="hljs-keyword">false</span>,
+        <span class="hljs-string">'echo'</span>            =&gt; <span class="hljs-keyword">false</span>,
+        <span class="hljs-string">'order'</span>           =&gt; <span class="hljs-string">'DESC'</span>,
+        <span class="hljs-string">'post_type'</span>     	=&gt; <span class="hljs-string">'post'</span>
+      );
+      $raw_html_output = wp_get_archives( $args );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-32" id="section-32"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Strip site url if $full === true</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $homeUrl = ( <span class="hljs-keyword">false</span> === $full ) ? preg_quote( home_url() . <span class="hljs-string">'/'</span>, <span class="hljs-string">'/'</span> ) : <span class="hljs-string">''</span>;
+
+      preg_match_all(<span class="hljs-string">"/&lt;option value=(?:\"|\')(?:{$homeUrl})(.*)(?:\"|\')&gt;.*&lt;\/option&gt;/"</span>, $raw_html_output, $urls);
+
+      <span class="hljs-keyword">return</span> $urls[<span class="hljs-number">1</span>];
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-33" id="section-33"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return array of term - Relay global ids</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$taxonomy
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$orderby
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve_tag_cloud</span><span class="hljs-params">( $taxonomy = <span class="hljs-string">'post_tag'</span>, $orderby_name )</span> </span>{
+      $args = <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'orderby'</span>                   =&gt; $orderby_name ? <span class="hljs-string">'name'</span> : <span class="hljs-string">'count'</span>, 
+        <span class="hljs-string">'order'</span>                     =&gt; <span class="hljs-string">'ASC'</span>,
+        <span class="hljs-string">'taxonomy'</span>                  =&gt; $taxonomy, 
+        <span class="hljs-string">'echo'</span>                      =&gt; <span class="hljs-keyword">false</span>,
+        <span class="hljs-string">'child_of'</span>                  =&gt; <span class="hljs-keyword">null</span>, <span class="hljs-comment">// see Note!</span>
+      );
+
+      $raw_html_output = wp_tag_cloud($args);
+
+      $homeUrl = preg_quote( home_url() . <span class="hljs-string">'/tag/'</span>, <span class="hljs-string">'/'</span> );
+
+      preg_match_all(<span class="hljs-string">"/tag-link-([0-9]+) /"</span>, $raw_html_output, $ids);
+
+      $term_ids = [];
+      <span class="hljs-keyword">foreach</span>( $ids[<span class="hljs-number">1</span>] <span class="hljs-keyword">as</span> $id ) {
+        $term_ids[] = (int) $id;
+      }
+      
+      <span class="hljs-keyword">return</span> $term_ids;
+    }
+
+  }
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>_typography.scss</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\src\\scss\\_typography.scss";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>_typography.scss</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss"><span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">text-rendering</span>: optimizeLegibility;
+}
+
+<span class="hljs-selector-tag">body</span>, <span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-tag">h2</span>, <span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-tag">h4</span>, <span class="hljs-selector-tag">h5</span>, <span class="hljs-selector-tag">h6</span> {
+  <span class="hljs-attribute">font-size-adjust</span>: <span class="hljs-number">0.5</span>;
+}
+
+<span class="hljs-selector-class">.main</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1em</span>;
+  <span class="hljs-comment">/* equivalent to 16px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  <span class="hljs-comment">/* equivalent to 20px */</span>
+}
+
+
+<span class="hljs-selector-tag">h1</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+  <span class="hljs-comment">/* 2x body copy size = 32px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  <span class="hljs-comment">/* 45px / 36px */</span>
+
+  <span class="hljs-selector-class">.sub</span> {
+    <span class="hljs-attribute">font-variant</span>: small-caps;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.75</span>;
+  }
+}
+
+<span class="hljs-selector-tag">h2</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.625em</span>;
+  <span class="hljs-comment">/* 1.625x body copy size = 26px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.15384615</span>;
+  <span class="hljs-comment">/* 30px / 26px */</span>
+}
+
+<span class="hljs-selector-tag">h3</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.375em</span>;
+  <span class="hljs-comment">/* 1.375x body copy size = 22px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.13636364</span>;
+  <span class="hljs-comment">/* 25px / 22px */</span>
+}
+
+<span class="hljs-selector-tag">h4</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.125em</span>;
+  <span class="hljs-comment">/* 1.125x body copy size = 18px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.11111111</span>;
+}
+
+<span class="hljs-selector-tag">blockquote</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.25em</span>;
+  <span class="hljs-comment">/* 20px / 16px */</span>
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  <span class="hljs-comment">/* 25px / 20px */</span>
+}
+
+<span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">43.75em</span>) {
+  <span class="hljs-selector-class">.main</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1em</span>;
+    <span class="hljs-comment">/* equivalent to 16px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.375</span>;
+    <span class="hljs-comment">/* equivalent to 22px */</span>
+  }
+
+  <span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2.5em</span>;
+    <span class="hljs-comment">/* 2.5x body copy size = 40px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.125</span>;
+  }
+
+  <span class="hljs-selector-tag">h2</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+    <span class="hljs-comment">/* 2x body copy size = 32px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  }
+
+  <span class="hljs-selector-tag">h3</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.5em</span>;
+    <span class="hljs-comment">/* 1.5x body copy size = 24px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  }
+
+  <span class="hljs-selector-tag">h4</span> {
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.22222222</span>;
+    <span class="hljs-comment">/* (22px / 18px */</span>
+  }
+
+  <span class="hljs-selector-tag">blockquote</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.5em</span>;
+    <span class="hljs-comment">/* 24px / 16px = */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.45833333</span>;
+    <span class="hljs-comment">/* 35px / 24px */</span>
+  }
+}
+
+<span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">56.25em</span>) {
+  <span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">3em</span>;
+    <span class="hljs-comment">/* 3x body copy size = 48px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.05</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>keep to a multiple of the 20px line height
+and something more appropriate for display headings</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  }
+
+  <span class="hljs-selector-tag">h2</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2.25em</span>;
+    <span class="hljs-comment">/* 2.25x body copy size = 36px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  }
+
+  <span class="hljs-selector-tag">h3</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.75em</span>;
+    <span class="hljs-comment">/* 1.75x body copy size = 28px */</span>
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.25</span>;
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

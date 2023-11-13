@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SidebarConnectionDefinition.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../../doc-style.css" />
+  <script src="../../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\Sidebar\\Connection\\SidebarConnectionDefinition.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>SidebarConnectionDefinition.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>\<span class="hljs-title">Connection</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">CustomTypes</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">ExtraSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class SidebarConnectionDefinition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SidebarConnectionDefinition</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the Relay connection for Sidebar</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $connection;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Create the Relay connection for Sidebars.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$from_type Connection type.
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connection</span><span class="hljs-params">( $from_type = <span class="hljs-string">'Root'</span> )</span> </span>{
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$connection ) {
+
+			$connection = Relay::connectionDefinitions( [
+				<span class="hljs-string">'nodeType'</span> =&gt; CustomTypes::sidebar(),
+				<span class="hljs-string">'name'</span>     =&gt; <span class="hljs-string">'Sidebars'</span>,
+				<span class="hljs-string">'connectionFields'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> [
+						<span class="hljs-string">'nodes'</span> =&gt; [
+							<span class="hljs-string">'type'</span>        =&gt; Types::list_of( CustomTypes::sidebar() ),
+							<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The nodes of the connection, without the edges'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+							<span class="hljs-string">'resolve'</span>     =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, $args, $context, $info )</span> </span>{
+								<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $source[<span class="hljs-string">'nodes'</span>] ) ? $source[<span class="hljs-string">'nodes'</span>] : [];
+							},
+						],
+					];
+				},
+			] );
+
+			<span class="hljs-keyword">self</span>::$connection = [
+				<span class="hljs-string">'type'</span>        =&gt; $connection[<span class="hljs-string">'connectionType'</span>],
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'A collection of sidebar objects'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				<span class="hljs-string">'args'</span>        =&gt; Relay::connectionArgs(),
+				<span class="hljs-string">'resolve'</span>     =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, $args, AppContext $context, ResolveInfo $info )</span> </span>{
+					<span class="hljs-keyword">return</span> ExtraSource::resolve_sidebars_connection( $source, $args, $context, $info );
+				},
+			];
+		}
+
+		<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$connection ) ? <span class="hljs-keyword">self</span>::$connection : <span class="hljs-keyword">null</span>;
+	}
+
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

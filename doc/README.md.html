@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>README.md</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "README.md";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#wp-graphql-theme">WP-GraphQL-Theme</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#demo">Demo</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#usage">Usage</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#testing">Testing</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#docker-test-environment">Docker Test Environment</a>
+      </div>
+
+      <div class="heading h3">
+        <a href="#setup-instructions">Setup instructions</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#test-folder-structure">Test Folder Structure</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#notes">Notes</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#client-side-todo">Client-side TODO</a>
+      </div>
+
+      <div class="heading h2">
+        <a href="#server-side-todo">Server-side TODO</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="docs markdown"><div class="pilwrap" id="wp-graphql-theme">
+  <h1>
+    <a href="#wp-graphql-theme" name="wp-graphql-theme" class="pilcrow"></a>
+WP-GraphQL-Theme
+  </h1>
+</div>
+<p>A recreation of the TwentyFifteen Wordpress theme made using <a href="https://reactjs.org"><strong>React.js</strong></a> and <a href="https://apollographql.com"><strong>React-Apollo</strong></a>. The <a href="https://github.com/wp-graphql/wp-graphql"><strong>WPGraphQL</strong></a> and <a href="https://github.com/wp-graphql/wp-graphql-jwt-authentication"><strong>WPGraphQL-JWT-Authenication</strong></a> plugins need to be installed and activated for theme to work properly. This is meant to serve as a boilerplate for future themes I build with React.js, Apollo.</p>
+<div class="pilwrap" id="demo">
+  <h2>
+    <a href="#demo" name="demo" class="pilcrow"></a>
+Demo
+  </h2>
+</div>
+<p>Coming soon... I think</p>
+<div class="pilwrap" id="usage">
+  <h2>
+    <a href="#usage" name="usage" class="pilcrow"></a>
+Usage
+  </h2>
+</div>
+<p><strong>Not anywhere close to stable</strong></p>
+<ol>
+<li>Run <code>npm run build</code> in <code>client</code> directory. - If you haven't run the <code>build</code> command before but run the docker test enviroment you may have to change the permissions on the build folder or just delete it as the administrator and run <code>npm run build</code> again.</li>
+<li>Move new <code>build</code> directory to the wordpress theme folder and rename it how ever you'd like.</li>
+<li>Activate new theme in <code>Wordpress Dashboard</code> - Remember WPGraphQL and WPGraphQL-JWT-Authenication must be properly installed and activated for this theme to work.</li>
+</ol>
+<div class="pilwrap" id="testing">
+  <h2>
+    <a href="#testing" name="testing" class="pilcrow"></a>
+Testing
+  </h2>
+</div>
+<p>Right now the easiest way to get the webpack devServer up and running with a working WPGraphQL plugin is to use the docker environment. Although it's possible without Docker, but its very easy to run into problems.</p>
+<div class="pilwrap" id="docker-test-environment">
+  <h2>
+    <a href="#docker-test-environment" name="docker-test-environment" class="pilcrow"></a>
+Docker Test Environment
+  </h2>
+</div>
+<p>Docker-Compose is needed along with Docker. The WP test site is proxied for use with the devServer. You can reach the WPGraphQL endpoint at <code>/graphql</code>. Edit your <code>/etc/hosts</code> file to add an entry for <code>wpgraphql.example</code>, e.g. <code>127.0.0.1 localhost wpgraphql.example</code>. You don't have to use <code>wpgraphql.example</code> but whatever your use have to change all the entries of <code>wpgraphql.example</code> in these files.</p>
+<ul>
+<li><code>/docker-compose.yml</code></li>
+<li><code>/client/.env.development</code></li>
+<li><code>/client/package.json -</code>proxy<code>array take note of the port number and ensure that it matches the first port number</code>jwilder/nginx-proxy:alpine<code>'s ports field in</code>docker-compose.yml`</li>
+</ul>
+<div class="pilwrap" id="setup-instructions">
+  <h3>
+    <a href="#setup-instructions" name="setup-instructions" class="pilcrow"></a>
+Setup instructions
+  </h3>
+</div>
+<p>Run the following commands from your terminal in the project root directory.</p>
+<ol>
+<li>
+<p>Run <code>composer install</code> from inside the <code>server</code> directory.</p>
+</li>
+<li>
+<p>Run <code>npm install &amp;&amp; npm run build</code> from inside the <code>client</code> directory.</p>
+</li>
+<li>
+<p>Run <code>docker-compose -f docker-compose.dev.yml up -d</code> - sets up the wordpress test site</p>
+</li>
+<li>
+<p>Wait 30 seconds and navigate to <code>http://wpgraphql.example:8000/</code> or the address you setup. Run through the installation and activate the <code>WPGraphQL Test Settings</code> plugin. Now you ready to run tests.</p>
+</li>
+<li>
+<p>Run <code>npm start</code> from inside <code>client</code> directory to run devServer with proxied test site.</p>
+</li>
+</ol>
+<div class="pilwrap" id="test-folder-structure">
+  <h2>
+    <a href="#test-folder-structure" name="test-folder-structure" class="pilcrow"></a>
+Test Folder Structure
+  </h2>
+</div>
+<p>All tests are located in <code>./client/src/__tests__/</code> and created using <a href="https://github.com/kentcdodds/react-testing-library"><strong>React Testing Library</strong></a> and <a href="https://jestjs.io"><strong>Jest</strong></a></p>
+<ul>
+<li><code>__core_tests__</code> - WPCore Components tests</li>
+<li><code>__customizr_tests__</code> - WPCustomizr Components tests</li>
+<li><code>__router_tests__</code> - WPRouter Components tests</li>
+<li><code>__templates_tests__</code> - WPTemplates Components tests</li>
+</ul>
+<div class="pilwrap" id="notes">
+  <h2>
+    <a href="#notes" name="notes" class="pilcrow"></a>
+Notes
+  </h2>
+</div>
+<ul>
+<li>Gutenberg is supported.</li>
+<li>I wouldn't recommend changing anything but the contents <code>/client/public/inc/wp-graphql</code> in the <code>/client/public</code> directory. The contents <code>/client/public</code> handle WP theme function and SEO optimization on top of loading the JS application. Neither of which it does a great job at but it function a great base going forward.</li>
+</ul>
+<div class="pilwrap" id="client-side-todo">
+  <h2>
+    <a href="#client-side-todo" name="client-side-todo" class="pilcrow"></a>
+Client-side TODO
+  </h2>
+</div>
+<ol>
+<li>
+<p>Create mock data and tests</p>
+</li>
+<li>
+<p>Write proper documentation</p>
+</li>
+<li>
+<p>Add transitions</p>
+</li>
+<li>
+<p>Create WPCustomizr Components</p>
+</li>
+<li>
+<p>(Maybe) Finish Widgets</p>
+</li>
+</ol>
+<div class="pilwrap" id="server-side-todo">
+  <h2>
+    <a href="#server-side-todo" name="server-side-todo" class="pilcrow"></a>
+Server-side TODO
+  </h2>
+</div>
+<ol>
+<li>
+<p>Add and polish sample data created by <code>WPGraphQL Test Settings</code></p>
+</li>
+<li>
+<p>Add a Bootstrap 4 shortcode plugin.</p>
+</li>
+</ol>
+</div>
+  </div>
+</body>
+</html>

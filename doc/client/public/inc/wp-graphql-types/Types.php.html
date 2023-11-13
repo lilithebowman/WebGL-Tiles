@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Types.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../doc-style.css" />
+  <script src="../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>Types.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+  <span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>;
+  
+  <span class="hljs-keyword">require_once</span> <span class="hljs-keyword">__DIR__</span> . <span class="hljs-string">'/loader.php'</span>;
+
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>\<span class="hljs-title">SidebarType</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">StyleType</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>\<span class="hljs-title">ThemeModsType</span>;
+  <span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">WidgetInterfaceType</span>;
+
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomTypes</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $sidebar;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $style;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $theme_mods;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $widget;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sidebar</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$sidebar ?: <span class="hljs-keyword">self</span>::$sidebar = <span class="hljs-keyword">new</span> SideBarType();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">style</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$style ?: <span class="hljs-keyword">self</span>::$style = <span class="hljs-keyword">new</span> StyleType();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">theme_mods</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$theme_mods ?: <span class="hljs-keyword">self</span>::$theme_mods = <span class="hljs-keyword">new</span> ThemeModsType();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">widget</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$widget ?: <span class="hljs-keyword">self</span>::$widget = <span class="hljs-keyword">new</span> WidgetInterfaceType();
+    }
+  }
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

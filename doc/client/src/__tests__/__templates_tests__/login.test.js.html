@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>login.test.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../doc-style.css" />
+  <script src="../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../";
+    var thisFile = "client\\src\\__tests__\\__templates_tests__\\login.test.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>login.test.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { apolloRender <span class="hljs-keyword">as</span> render, cleanup, fireEvent, waitForElement } <span class="hljs-keyword">from</span> <span class="hljs-string">'./apollo-utils'</span>;
+<span class="hljs-keyword">import</span> { Login } <span class="hljs-keyword">from</span> <span class="hljs-string">'../../components/'</span>;
+
+afterEach(cleanup);
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">loggedIn</span>: <span class="hljs-literal">false</span> };
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span>(
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Login</span>
+        <span class="hljs-attr">clearCurrentUser</span>=<span class="hljs-string">{()</span> =&gt;</span> {
+          localStorage.setItem('user-token');
+          this.setState({ loggedIn: false });
+        }}
+        setCurrentUser={(authToken) =&gt; {
+          localStorage.setItem('user-token', authToken);
+          this.setState({ loggedIn: true });
+        }}
+        loggedIn={this.state.loggedIn}
+      /&gt;</span>
+    );
+  }
+}
+
+it(<span class="hljs-string">'shows login failed dialogue when invalid login info submitted'</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> { getByPlaceholderText, getByTestId, getByText } = render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>)
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>Input login info</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  fireEvent.change(getByPlaceholderText(<span class="hljs-string">'Enter Login'</span>), { <span class="hljs-attr">target</span>: { <span class="hljs-attr">value</span>: <span class="hljs-string">'invalidUser'</span> } });
+  fireEvent.change(getByPlaceholderText(<span class="hljs-string">'Enter Password'</span>), { <span class="hljs-attr">target</span>: { <span class="hljs-attr">value</span>: <span class="hljs-string">'qwerty'</span> } });
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>Fire click event</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  fireEvent.click(getByTestId(<span class="hljs-string">'login-button'</span>));
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Retrieve response dialogue and confirm true</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> waitForElement(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> getByText(<span class="hljs-string">'Invalid Login'</span>));
+  expect(response).toBeTruthy();
+});
+
+it(<span class="hljs-string">'show login successful dialogue when valid login info submitted'</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> { getByPlaceholderText, getByTestId } = render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>)
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Input login info</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  fireEvent.change(getByPlaceholderText(<span class="hljs-string">'Enter Login'</span>), { <span class="hljs-attr">target</span>: { <span class="hljs-attr">value</span>: process.env.REACT_APP_TEST_USER } });
+  fireEvent.change(getByPlaceholderText(<span class="hljs-string">'Enter Password'</span>), { <span class="hljs-attr">target</span>: { <span class="hljs-attr">value</span>: process.env.REACT_APP_TEST_USER_PASSWORD } });
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>Fire click event</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  fireEvent.click(getByTestId(<span class="hljs-string">'login-button'</span>));
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<p>Retrieve response dialogue and confirm true</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  <span class="hljs-keyword">const</span> logoutButton = <span class="hljs-keyword">await</span> waitForElement(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> getByTestId(<span class="hljs-string">'logout-button'</span>));
+  expect(logoutButton).toBeTruthy();
+
+  fireEvent.click(logoutButton);
+
+  expect(getByPlaceholderText(<span class="hljs-string">'Enter Login'</span>)).toBeTruthy();
+  expect(getByPlaceholderText(<span class="hljs-string">'Enter Password'</span>)).toBeTruthy();
+
+});
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

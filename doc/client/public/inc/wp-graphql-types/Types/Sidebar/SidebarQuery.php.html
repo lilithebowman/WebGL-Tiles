@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SidebarQuery.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../doc-style.css" />
+  <script src="../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\Sidebar\\SidebarQuery.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>SidebarQuery.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">CustomTypes</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">ExtraSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class SidebarQuery</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SidebarQuery</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the root_query field definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $root_query;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the sidebar_by field definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $sidebar_by;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Method that returns the root query field definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">root_query</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$root_query ) {
+
+			<span class="hljs-keyword">self</span>::$root_query = [
+				<span class="hljs-string">'type'</span> =&gt; CustomTypes::sidebar(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'A WordPress sidebar'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				<span class="hljs-string">'args'</span> =&gt; [
+					<span class="hljs-string">'id'</span> =&gt; Types::non_null( Types::id() ),
+				],
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, array $args, AppContext $context, ResolveInfo $info )</span> </span>{
+					$id_components = Relay::fromGlobalId( $args[<span class="hljs-string">'id'</span>] );
+
+					<span class="hljs-keyword">return</span> ExtraSource::resolve_sidebar( $id_components[<span class="hljs-string">'id'</span>] );
+				},
+			];
+
+		}
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$root_query;
+	}
+	
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Method that returns the &quot;sidebar_by&quot; field definition to get a sidebar by id or name.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sidebar_by</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$sidebar_by ) {
+
+			<span class="hljs-keyword">self</span>::$sidebar_by = [
+				<span class="hljs-string">'type'</span> =&gt; CustomTypes::sidebar(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'A WordPress sidebar'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				<span class="hljs-string">'args'</span> =&gt; [
+					<span class="hljs-string">'id'</span> 		=&gt; Types::string(),
+					<span class="hljs-string">'name'</span> 	=&gt; Types::string(),
+				],
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $source, array $args, AppContext $context, ResolveInfo $info )</span> </span>{
+
+					$sidebar = <span class="hljs-keyword">null</span>;
+
+					<span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span>( $args[ <span class="hljs-string">'id'</span> ] ) ) {
+						$sidebar = ExtraSource::resolve_sidebar( $args[ <span class="hljs-string">'id'</span> ] );
+					}
+					<span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $args[ <span class="hljs-string">'name'</span> ] ) ) {
+						$sidebar = ExtraSource::resolve_sidebar( $args[ <span class="hljs-string">'name'</span> ], <span class="hljs-string">'name'</span> );
+					}
+
+					<span class="hljs-keyword">return</span> $sidebar;
+
+				},
+			];
+
+		}
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$sidebar_by;
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

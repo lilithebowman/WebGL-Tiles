@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>comments.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\comments.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>comments.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The template for displaying comments</p>
+</div>
+<div class="body">
+<p>This is the template that displays the area of the page that contains both the current comments
+and the comment form.</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>If the current post is protected by a password and
+the visitor has not yet entered the password we will
+return early without loading the comments.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">if ( post_password_required() ) {
+	return;
+}
+?&gt;
+
+&lt;div id="comments" class="comments-area"&gt;
+
+	&lt;?php
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>You can start editing here -- including this comment!</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	if ( have_comments() ) : ?&gt;
+		&lt;h2 class="comments-title"&gt;
+			&lt;?php
+			$comment_count = get_comments_number();
+			if ( 1 === $comment_count ) {
+				printf(
+					/* translators: 1: title. */
+					esc_html_e( 'One thought on &amp;ldquo;%1$s&amp;rdquo;', 'gutenbergtheme' ),
+					'&lt;span&gt;' . get_the_title() . '&lt;/span&gt;'
+				);
+			} else {
+				printf( // WPCS: XSS OK.
+					/* translators: 1: comment count number, 2: title. */
+					esc_html( _nx( '%1$s thought on &amp;ldquo;%2$s&amp;rdquo;', '%1$s thoughts on &amp;ldquo;%2$s&amp;rdquo;', $comment_count, 'comments title', 'gutenbergtheme' ) ),
+					number_format_i18n( $comment_count ),
+					'&lt;span&gt;' . get_the_title() . '&lt;/span&gt;'
+				);
+			}
+			?&gt;
+		&lt;/h2&gt;&lt;!-- .comments-title --&gt;
+
+		&lt;?php the_comments_navigation(); ?&gt;
+
+		&lt;ol class="comment-list"&gt;
+			&lt;?php
+				wp_list_comments( array(
+					'style'      =&gt; 'ol',
+					'short_ping' =&gt; true,
+				) );
+			?&gt;
+		&lt;/ol&gt;&lt;!-- .comment-list --&gt;
+
+		&lt;?php the_comments_navigation();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>If comments are closed and there are comments, let's leave a little note, shall we?</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		if ( ! comments_open() ) : ?&gt;
+			&lt;p class="no-comments"&gt;&lt;?php esc_html_e( 'Comments are closed.', 'gutenbergtheme' ); ?&gt;&lt;/p&gt;
+		&lt;?php
+		endif;
+
+	endif; // Check for have_comments().
+
+	comment_form();
+	?&gt;
+
+&lt;/div&gt;&lt;!-- #comments --&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

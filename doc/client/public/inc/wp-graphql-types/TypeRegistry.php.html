@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TypeRegistry.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../doc-style.css" />
+  <script src="../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\TypeRegistry.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>TypeRegistry.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+  <span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class TypeRegistry</p>
+</div>
+<div class="body">
+<p>This class provides some helper methods to make creating type registries easier.</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TypeRegistry</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Store type registry name</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> $registry_name;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Store type fully qualified class name</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> $__CLASS__ = <span class="hljs-keyword">__CLASS__</span>;  
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the type objects</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> $types;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>TypeRegistry constructor</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>void
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">( $from_type = <span class="hljs-string">'root'</span> )</span> </span>{
+      <span class="hljs-keyword">static</span>::$registry_name = <span class="hljs-string">"{$from_type}_registry"</span>;
+
+      <span class="hljs-keyword">if</span>( $from_type !== <span class="hljs-string">'root'</span>) {
+
+        add_filter(<span class="hljs-string">'graphql_schema_config'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $schema_config )</span> </span>{
+          
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Get registry types</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">          $registry_types = <span class="hljs-keyword">self</span>::prepare_types( <span class="hljs-keyword">static</span>::get_types() );
+          <span class="hljs-keyword">if</span>( is_array( $registry_types ) &amp;&amp; ! <span class="hljs-keyword">empty</span>( $registry_types ) ) {
+            <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $schema_config[<span class="hljs-string">'types'</span>] ) ) {
+              $schema_config[<span class="hljs-string">'types'</span>] = $registry_types;
+            } <span class="hljs-keyword">else</span> {
+              $schema_config[<span class="hljs-string">'types'</span>] += $registry_types;
+            }
+          }
+          <span class="hljs-keyword">return</span> $schema_config;
+        }, <span class="hljs-number">10</span>, <span class="hljs-number">1</span> );
+
+      }
+
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Return type listing for GraphQL Schema config types field. This is for using types
+that aren't loaded on the root type registry</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_types</span><span class="hljs-params">()</span></span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Prepares Type config array</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$type_name
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$data
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_config</span><span class="hljs-params">( $type_name, $data )</span></span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Workhorse of Type Registry - Initializes and retrieves Types</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$type_name - Name of Type
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__callStatic</span><span class="hljs-params">( $type_name, array $args = [] )</span> </span>{
+      $registry_name = <span class="hljs-keyword">static</span>::$registry_name;
+      $__CLASS__ = <span class="hljs-keyword">static</span>::$__CLASS__;
+      
+      <span class="hljs-keyword">if</span>( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$types ) <span class="hljs-keyword">self</span>::$types = [];
+      <span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">isset</span>( <span class="hljs-keyword">self</span>::$types[ $registry_name ] ) ) <span class="hljs-keyword">self</span>::$types[ $registry_name ] = [];
+      
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Check if default type_name_config function exists and initialize type
+the name format is type_name_config()</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $type_name = str_replace([ <span class="hljs-string">'-'</span>, <span class="hljs-string">' '</span> ], <span class="hljs-string">'_'</span>, $type_name);
+      $type_func = <span class="hljs-string">"{$type_name}_config"</span>;
+      <span class="hljs-keyword">if</span>( method_exists( $__CLASS__, $type_func ) &amp;&amp; ! <span class="hljs-keyword">self</span>::loaded( $type_name ) ) {
+        <span class="hljs-keyword">self</span>::$types[ $registry_name ][ $type_name ] = <span class="hljs-keyword">static</span>::$type_func();
+      }
+      
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>If no config function exist use _config instead</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">elseif</span>( ! method_exists( $__CLASS__, $type_func ) &amp;&amp; ! <span class="hljs-keyword">self</span>::loaded( $type_name ) ) {
+        <span class="hljs-keyword">self</span>::$types[ $registry_name ][ $type_name ] = <span class="hljs-keyword">static</span>::_config( $type_name, ...$args );
+      }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for providing a custom type configuration function</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">self</span>::$types = apply_filters( <span class="hljs-string">"graphql_register_{$registry_name}::{$type_name}"</span>, <span class="hljs-keyword">self</span>::$types, $registry_name, $type_name );
+      
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Check if type loaded or possibly unloaded</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::loaded( $type_name ) ? <span class="hljs-keyword">self</span>::$types[ $registry_name ][ $type_name ] : <span class="hljs-keyword">null</span>;
+
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Checks if type is loaded</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$type_name - Name of type
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>boolean
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loaded</span><span class="hljs-params">( $type_name )</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">isset</span>( <span class="hljs-keyword">self</span>::$types[ <span class="hljs-keyword">static</span>::$registry_name ][ $type_name ] ) &amp;&amp; is_object( <span class="hljs-keyword">self</span>::$types[ <span class="hljs-keyword">static</span>::$registry_name ][ $type_name ] );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Sort and filters types array</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$types - array of Types
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepare_types</span><span class="hljs-params">( $types )</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter once with lowercase, once with uppercase for Back Compat.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $lc_type_name = lcfirst( <span class="hljs-keyword">self</span>::$registry_name );
+      $uc_type_name = ucfirst( <span class="hljs-keyword">self</span>::$registry_name );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter the types with the registry_name explicitly in the filter name</p>
+</div>
+<div class="body">
+<p>This is useful for more targeted filtering, and is applied after the general filter, to allow for
+more specific overrides</p>
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$types The array of types for the schema config
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $types = apply_filters( <span class="hljs-string">"graphql_{$lc_type_name}_types"</span>, $types );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter the types with the type_name explicitly in the filter name</p>
+</div>
+<div class="body">
+<p>This is useful for more targeted filtering, and is applied after the general filter, to allow for
+more specific overrides</p>
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$types The array of types for the schema config
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $types = apply_filters( <span class="hljs-string">"graphql_{$uc_type_name}_types"</span>, $types );
+
+      <span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $types ) ? $types : <span class="hljs-keyword">null</span>;
+
+    }
+
+  }
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

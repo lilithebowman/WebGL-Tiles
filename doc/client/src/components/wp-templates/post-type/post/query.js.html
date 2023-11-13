@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>query.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../doc-style.css" />
+  <script src="../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../";
+    var thisFile = "client\\src\\components\\wp-templates\\post-type\\post\\query.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>query.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Post Queries</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">import</span> { gql } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-boost'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Fragments</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_CONTENT_FRAGMENT= gql<span class="hljs-string">`
+  fragment PostContent on Post {
+    id
+    postId
+    content
+    date
+    modified
+    title
+    isGutenPost
+    permalink
+  }
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_AUTHOR_FRAGMENT = gql<span class="hljs-string">`
+  fragment PostAuthor on Post {
+    author {
+      id
+      userId
+      nicename
+      avatar {
+        url
+        foundAvatar
+      }
+    }
+  }
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_CATEGORIES_FRAGMENT = gql<span class="hljs-string">`
+  fragment PostCategories on Post {
+    categories {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_TAGS_FRAGMENT = gql<span class="hljs-string">`
+  fragment PostTags on Post {
+    tags {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_FEATURED_FRAGMENT = gql<span class="hljs-string">`
+  fragment PostFeatured on Post {
+    featuredImage {
+      id
+      mediaItemId
+      title
+      altText
+      sourceUrl
+    }
+  }
+`</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Queries</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_QUERY = gql<span class="hljs-string">`
+  query PostQuery($id: ID!) {
+    post(id: $id) {
+      ...PostContent
+      ...PostAuthor
+      ...PostCategories
+      ...PostTags
+      ...PostFeatured
+    }
+  }
+  <span class="hljs-subst">${POST_CONTENT_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_AUTHOR_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_CATEGORIES_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_TAGS_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_FEATURED_FRAGMENT}</span>
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> POST_SLUG_QUERY = gql<span class="hljs-string">`
+  query PostQuery($slug: String!) {
+    postBy(slug: $slug) {
+      ...PostContent
+      ...PostAuthor
+      ...PostCategories
+      ...PostTags
+      ...PostFeatured
+    }
+  }
+  <span class="hljs-subst">${POST_CONTENT_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_AUTHOR_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_CATEGORIES_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_TAGS_FRAGMENT}</span>
+  <span class="hljs-subst">${POST_FEATURED_FRAGMENT}</span>
+`</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ id, slug }) =&gt; {
+  <span class="hljs-keyword">if</span> (slug) {
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">query</span>: POST_SLUG_QUERY, <span class="hljs-attr">variables</span>: { slug } };
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">query</span>: POST_QUERY, <span class="hljs-attr">variables</span>: { id } };
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

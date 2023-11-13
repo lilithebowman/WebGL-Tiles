@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ThemeModsType.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../doc-style.css" />
+  <script src="../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\ThemeMods\\ThemeModsType.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>ThemeModsType.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Error</span>\<span class="hljs-title">UserError</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">DataSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">ExtraSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">WPObjectType</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class ThemeModsType</p>
+</div>
+<div class="body">
+<p>This sets up the theme modification type</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThemeModsType</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WPObjectType</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the type name</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $type_name;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the $fields definition for the SettingsType</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $fields;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>ThemeModType constructor.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span> </span>{
+		
+		<span class="hljs-keyword">self</span>::$type_name = <span class="hljs-string">'ThemeMods'</span>;
+
+		$config = [
+			<span class="hljs-string">'name'</span>        =&gt; <span class="hljs-keyword">self</span>::$type_name,
+			<span class="hljs-string">'fields'</span>      =&gt; <span class="hljs-keyword">self</span>::fields(),
+			<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'All of registered theme modifications'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+		];
+
+    <span class="hljs-keyword">parent</span>::__construct( $config );
+    
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This defines the fields for the ThemeMods type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">$mods</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition|mixed|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fields</span><span class="hljs-params">()</span> </span>{
+
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$fields) {
+			<span class="hljs-keyword">self</span>::$fields = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+
+				$fields = [
+					<span class="hljs-string">'background'</span> =&gt; [ 
+						<span class="hljs-string">'type'</span> 				=&gt; Types::post_object( <span class="hljs-string">'attachment'</span> ),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'custom background'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span> </span>{
+							<span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'background'</span>] ) ) { 
+								<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'background'</span>][<span class="hljs-string">'id'</span>] ) ) ?
+									DataSource::resolve_post_object( absint( $root[<span class="hljs-string">'background'</span>][<span class="hljs-string">'id'</span>] ), <span class="hljs-string">'attachment'</span> ) :
+									<span class="hljs-keyword">null</span>;
+							}
+			
+							<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+						}
+					],
+					<span class="hljs-string">'backgroundColor'</span> =&gt; [ 
+						<span class="hljs-string">'type'</span> 				=&gt; Types::string(),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'background color'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span> </span>{
+							<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'background_color'</span>] ) ) ? $root[<span class="hljs-string">'background_color'</span>] : <span class="hljs-keyword">null</span>;
+						}
+					],
+					<span class="hljs-string">'customCssPostId'</span> =&gt; [ 
+						<span class="hljs-string">'type'</span> 				=&gt; Types::int(),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'custom theme logo'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span> </span>{
+							<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'custom_css_post_id'</span>] ) ) ? $root[<span class="hljs-string">'custom_css_post_id'</span>] : <span class="hljs-keyword">null</span>;
+						}
+					],
+					<span class="hljs-string">'customLogo'</span> =&gt; [ 
+						<span class="hljs-string">'type'</span> 				=&gt; Types::post_object( <span class="hljs-string">'attachment'</span> ),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'custom theme logo'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span></span>{
+							<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'custom_logo'</span>] ) ) ? DataSource::resolve_post_object( absint( $root[<span class="hljs-string">'custom_logo'</span>] ), <span class="hljs-string">'attachment'</span> ) : <span class="hljs-keyword">null</span>;
+						}
+					],
+					<span class="hljs-string">'headerImage'</span> =&gt; [ 
+						<span class="hljs-string">'type'</span> 				=&gt; Types::post_object( <span class="hljs-string">'attachment'</span> ),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'custom header image'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span></span>{
+							<span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span> ( $root[<span class="hljs-string">'header_image'</span>] ) ) {
+								<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'header_image'</span>][<span class="hljs-string">'id'</span>] ) ) ?
+									DataSource::resolve_post_object( absint( $root[<span class="hljs-string">'header_image'</span>][<span class="hljs-string">'id'</span>] ), <span class="hljs-string">'attachment'</span> ) :
+									<span class="hljs-keyword">null</span>;
+							}
+							
+							<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+						},
+					],
+					<span class="hljs-string">'navMenuLocations'</span> =&gt; [
+						<span class="hljs-string">'type'</span> 				=&gt; Types::menu(),
+						<span class="hljs-string">'description'</span>	=&gt; __( <span class="hljs-string">'theme menu locations'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> ),
+						<span class="hljs-string">'args'</span>				=&gt; [
+							<span class="hljs-string">'location'</span> =&gt; [
+								<span class="hljs-string">'type'</span>	=&gt; Types::string(),
+								<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'theme menu location name'</span>, <span class="hljs-string">'wp-graphql-extra-options'</span> )
+							],
+						],
+						<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($root, $args, $context, $info )</span> </span>{
+							<span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $args[ <span class="hljs-string">'location'</span> ] ) &amp;&amp; ! <span class="hljs-keyword">empty</span> ( $root[<span class="hljs-string">'nav_menu_locations'</span>] ) ) {
+								$location = $args[ <span class="hljs-string">'location'</span> ];
+								<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[<span class="hljs-string">'nav_menu_locations'</span>][ $location ] ) ) ?
+									DataSource::resolve_term_object( absint( $root[<span class="hljs-string">'nav_menu_locations'</span>][ $location ] ), <span class="hljs-string">'nav_menu'</span> ) :
+									<span class="hljs-keyword">null</span>;
+							}
+			
+							<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+						}
+					]
+				];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Get default field types, prepare fields and return field definitions</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">				$fields = <span class="hljs-keyword">self</span>::prepare_fields( <span class="hljs-keyword">self</span>::get_default_fields( $fields ), <span class="hljs-keyword">self</span>::$type_name );
+				<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $fields ) ? $fields : <span class="hljs-keyword">null</span>;
+			};
+		}
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$fields;
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Adds custom fields stored in theme_mods to field definitions</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_default_fields</span><span class="hljs-params">( $fields )</span> </span>{
+		
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Loop through theme mod data and define fields</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		<span class="hljs-keyword">foreach</span>( ExtraSource::resolve_theme_mods_data() <span class="hljs-keyword">as</span> $mod_name =&gt; $mod_data ) {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Format mod name to a WPGraphQL-friendly name</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			$field_key = lcfirst( str_replace( [<span class="hljs-string">'_'</span>, <span class="hljs-string">'-'</span>], <span class="hljs-string">''</span>, ucwords( $mod_name, <span class="hljs-string">'_-'</span> ) ) );
+			
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Continue if field exists</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $fields[ $field_key ] ) ) <span class="hljs-keyword">continue</span>;
+			
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Define field</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			$fields[ $field_key ] = [ 
+				<span class="hljs-string">'type'</span> 				=&gt; Types::string(),
+				<span class="hljs-string">'description'</span>	=&gt; $mod_name,
+				<span class="hljs-string">'resolve'</span>			=&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $root, $args, $context, $info )</span> <span class="hljs-title">use</span><span class="hljs-params">( $mod_name )</span> </span>{
+					<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $root[ $mod_name ] ) ) ? (string) $root[ $mod_name ] : <span class="hljs-keyword">null</span>;
+				}
+			];
+
+		}
+
+		<span class="hljs-keyword">return</span> $fields;
+	}
+
+}
+
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

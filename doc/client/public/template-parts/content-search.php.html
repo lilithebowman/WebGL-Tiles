@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>content-search.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\public\\template-parts\\content-search.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>content-search.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Template part for displaying results in search pages</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+?&gt;
+
+&lt;article id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;
+	&lt;header class="entry-header"&gt;
+		&lt;?php the_title( sprintf( '&lt;h2 class="entry-title"&gt;&lt;a href="%s" rel="bookmark"&gt;', esc_url( get_permalink() ) ), '&lt;/a&gt;&lt;/h2&gt;' ); ?&gt;
+
+		&lt;?php if ( 'post' === get_post_type() ) : ?&gt;
+		&lt;div class="entry-meta"&gt;
+			&lt;?php gutenbergtheme_posted_on(); ?&gt;
+		&lt;/div&gt;&lt;!-- .entry-meta --&gt;
+		&lt;?php endif; ?&gt;
+	&lt;/header&gt;&lt;!-- .entry-header --&gt;
+
+	&lt;div class="entry-summary"&gt;
+		&lt;?php the_excerpt(); ?&gt;
+	&lt;/div&gt;&lt;!-- .entry-summary --&gt;
+
+	&lt;footer class="entry-footer"&gt;
+		&lt;?php gutenbergtheme_entry_footer(); ?&gt;
+	&lt;/footer&gt;&lt;!-- .entry-footer --&gt;
+&lt;/article&gt;&lt;!-- #post-&lt;?php the_ID(); ?&gt; --&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

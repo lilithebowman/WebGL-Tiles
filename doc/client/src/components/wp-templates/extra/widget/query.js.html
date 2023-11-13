@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>query.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../doc-style.css" />
+  <script src="../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../";
+    var thisFile = "client\\src\\components\\wp-templates\\extra\\widget\\query.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>query.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">import</span> { gql } <span class="hljs-keyword">from</span> <span class="hljs-string">'apollo-boost'</span>;
+
+<span class="hljs-keyword">const</span> getFields = <span class="hljs-function"><span class="hljs-params">type</span> =&gt;</span> {
+  <span class="hljs-keyword">switch</span>(type) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'CalendarWidget'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'MetaWidget'</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'SearchWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'ArchivesWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title count dropdown urls'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'AudioWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title audio preload loop'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'CategoriesWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title count dropdown hierarchical'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'CustomHTMLWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title content'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'GalleryWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title columns size linkType orderbyRandom images'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'ImageWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title image linkType linkUrl'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'NavMenuWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title menu'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'PagesWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title sortby exclude'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'RecentCommentsWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title commentsPerDisplay'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'RecentPostsWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title postsPerDisplay showDate'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'RSSWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title url itemsPerDisplay error showSummary showAuthor showDate'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'TagCloudWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title showCount taxonomy tags'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'TextWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title text filterText visual'</span>;
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'VideoWidget'</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'title loop preload video'</span>
+  }
+}
+
+<span class="hljs-keyword">const</span> getWidgetQuery = <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> fields = getFields(type);    
+  <span class="hljs-keyword">const</span> fragmentString = <span class="hljs-string">`fragment <span class="hljs-subst">${type}</span>Info on <span class="hljs-subst">${type}</span> { <span class="hljs-subst">${fields}</span>}`</span>;
+  <span class="hljs-keyword">const</span> queryString = <span class="hljs-string">`
+    query WidgetQuery($id: ID!) {
+      widget(id: $id) {
+        ...<span class="hljs-subst">${type}</span>Info
+      }
+    }`</span>;
+
+  <span class="hljs-keyword">return</span> gql<span class="hljs-string">`<span class="hljs-subst">${queryString}</span><span class="hljs-subst">${fragmentString}</span>`</span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> getWidgetQuery;
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

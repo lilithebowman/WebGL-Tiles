@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>content-none.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\public\\template-parts\\content-none.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>content-none.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Template part for displaying a message that posts cannot be found</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+?&gt;
+
+&lt;section class="no-results not-found"&gt;
+	&lt;header class="page-header"&gt;
+		&lt;h1 class="page-title"&gt;&lt;?php esc_html_e( 'Nothing Found', 'gutenbergtheme' ); ?&gt;&lt;/h1&gt;
+	&lt;/header&gt;&lt;!-- .page-header --&gt;
+
+	&lt;div class="page-content"&gt;
+		&lt;?php
+		if ( is_home() &amp;&amp; current_user_can( 'publish_posts' ) ) : ?&gt;
+
+			&lt;p&gt;&lt;?php
+				printf(
+					wp_kses(
+						/* translators: 1: link to WP admin new post page. */
+						__( 'Ready to publish your first post? &lt;a href="%1$s"&gt;Get started here&lt;/a&gt;.', 'gutenbergtheme' ),
+						array(
+							'a' =&gt; array(
+								'href' =&gt; array(),
+							),
+						)
+					),
+					esc_url( admin_url( 'post-new.php' ) )
+				);
+			?&gt;&lt;/p&gt;
+
+		&lt;?php elseif ( is_search() ) : ?&gt;
+
+			&lt;p&gt;&lt;?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'gutenbergtheme' ); ?&gt;&lt;/p&gt;
+			&lt;?php
+				get_search_form();
+
+		else : ?&gt;
+
+			&lt;p&gt;&lt;?php esc_html_e( 'It seems we can&amp;rsquo;t find what you&amp;rsquo;re looking for. Perhaps searching can help.', 'gutenbergtheme' ); ?&gt;&lt;/p&gt;
+			&lt;?php
+				get_search_form();
+
+		endif; ?&gt;
+	&lt;/div&gt;&lt;!-- .page-content --&gt;
+&lt;/section&gt;&lt;!-- .no-results --&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

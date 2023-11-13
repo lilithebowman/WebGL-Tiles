@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>single.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\single.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>single.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The template for displaying all single posts</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+get_header(); ?&gt;
+
+	&lt;main id="primary" class="site-main"&gt;
+
+	&lt;?php
+	while ( have_posts() ) : the_post();
+
+		get_template_part( 'template-parts/content', get_post_type() );
+
+		the_post_navigation( array(
+			'prev_text' =&gt; '← %title',
+			'next_text' =&gt; '%title →',
+		) );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>If comments are open or we have at least one comment, load up the comment template.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		<span class="hljs-keyword">if</span> ( comments_open() || get_comments_number() ) :
+			comments_template();
+		<span class="hljs-keyword">endif</span>;
+
+	<span class="hljs-keyword">endwhile</span>; <span class="hljs-comment">// End of the loop.</span>
+	<span class="hljs-meta">?&gt;</span>
+
+	&lt;/main&gt;&lt;!-- <span class="hljs-comment">#primary --&gt;</span>
+
+<span class="hljs-meta">&lt;?php</span>
+get_footer();
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

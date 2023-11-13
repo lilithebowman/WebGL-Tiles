@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>wp-graphql.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>wp-graphql.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Custom Theme types and fields added to the WPGraphQL schema</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+	<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">DataSource</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">ExtraSource</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>\<span class="hljs-title">Connection</span>\<span class="hljs-title">SidebarConnectionDefinition</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Sidebar</span>\<span class="hljs-title">SidebarQuery</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">Mutation</span>\<span class="hljs-title">StyleDelete</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">Mutation</span>\<span class="hljs-title">StyleSelect</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">Mutation</span>\<span class="hljs-title">StyleUpdate</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">StyleQuery</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>\<span class="hljs-title">Mutation</span>\<span class="hljs-title">ThemeModsUpdate</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>\<span class="hljs-title">ThemeModsQuery</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">Connection</span>\<span class="hljs-title">WidgetConnectionDefinition</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">WidgetQuery</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">CustomTypes</span>;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Retrieves WPGraphQL endpoint</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>string
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_graphql_endpoint</span><span class="hljs-params">()</span> </span>{
+		<span class="hljs-keyword">return</span> <span class="hljs-string">'/'</span> . apply_filters( <span class="hljs-string">'graphql_endpoint'</span>, <span class="hljs-string">'graphql'</span> );
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding Style, ThemeMods, Sidebar, and Widget Types to the WPGraphQL Schema</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$schema_config
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_types</span><span class="hljs-params">( $schema_config )</span> </span>{
+		<span class="hljs-keyword">require_once</span> get_template_directory() . <span class="hljs-string">'/inc/wp-graphql-types/Types.php'</span>;
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $schema_config[<span class="hljs-string">'types'</span>] ) ) {
+			$schema_config[<span class="hljs-string">'types'</span>] = [
+				CustomTypes::sidebar(),
+				CustomTypes::style(),
+				CustomTypes::theme_mods(),
+				CustomTypes::widget(),
+			];
+		} <span class="hljs-keyword">else</span> {
+			$schema_config[<span class="hljs-string">'types'</span>] += [
+				CustomTypes::sidebar(),
+				CustomTypes::style(),
+				CustomTypes::theme_mods(),
+				CustomTypes::widget(),
+			];
+		}
+
+		<span class="hljs-keyword">return</span> $schema_config;
+	}
+	add_filter( <span class="hljs-string">'graphql_schema_config'</span>, <span class="hljs-string">'twentyfifteen_types'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding Style, ThemeMods, Sidebar, and Widget queries to the WPGraphQL RootQuery</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$query_fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_queries</span><span class="hljs-params">( $query_fields )</span> </span>{
+		<span class="hljs-keyword">require_once</span> get_template_directory() . <span class="hljs-string">'/inc/wp-graphql-types/Types.php'</span>;
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $query_fields[<span class="hljs-string">'sidebar'</span>] ) ) {
+			$query_fields[<span class="hljs-string">'sidebar'</span>] = SidebarQuery::root_query();
+			$query_fields[<span class="hljs-string">'sidebarBy'</span>] = SidebarQuery::sidebar_by();
+			$query_fields[<span class="hljs-string">'sidebars'</span>] = SidebarConnectionDefinition::connection();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $query_fields[<span class="hljs-string">'style'</span>] ) ) {
+			$query_fields[<span class="hljs-string">'style'</span>] = StyleQuery::root_query();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $query_fields[<span class="hljs-string">'themeMods'</span>] ) ) {
+			$query_fields[<span class="hljs-string">'themeMods'</span>] = ThemeModsQuery::root_query();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $query_fields[<span class="hljs-string">'widget'</span>] ) ) {
+			$query_fields[<span class="hljs-string">'widget'</span>] = WidgetQuery::root_query();
+			$query_fields[<span class="hljs-string">'widgetBy'</span>] = WidgetQuery::widget_by();
+			$query_fields[<span class="hljs-string">'widgets'</span>] = WidgetConnectionDefinition::connection();
+		}
+		<span class="hljs-keyword">return</span> $query_fields;
+	}
+	add_filter( <span class="hljs-string">'graphql_root_queries'</span>, <span class="hljs-string">'twentyfifteen_queries'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Registers sidebar and widget node</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">null</span>
+<span>$node - null for returning node
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$id - The id of the node, from the global ID
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$type - The type of node to resolve, from the global ID
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_resolve_node</span><span class="hljs-params">( $node, $id, $type )</span> </span>{
+		<span class="hljs-keyword">require_once</span> get_template_directory() . <span class="hljs-string">'/inc/wp-graphql-types/Types.php'</span>;
+		<span class="hljs-keyword">switch</span>($type) {
+			<span class="hljs-keyword">case</span> <span class="hljs-string">'sidebar'</span>:
+				$node = ExtraSource::resolve_sidebar( $id );
+				<span class="hljs-keyword">break</span>;
+
+			<span class="hljs-keyword">case</span> <span class="hljs-string">'widget'</span>:
+				$node = ExtraSource::resolve_widget( $id );
+				<span class="hljs-keyword">break</span>;
+		}
+
+		<span class="hljs-keyword">return</span> $node;
+	}
+	add_filter( <span class="hljs-string">'graphql_resolve_node'</span>, <span class="hljs-string">'twentyfifteen_resolve_node'</span>, <span class="hljs-number">10</span>, <span class="hljs-number">3</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Registers sidebar and widget node types</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">mixed|object|array</span>
+<span>$type The type definition the node should resolve to.
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">mixed|object|array</span>
+<span>$node The $node that is being resolved
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_resolve_node_type</span><span class="hljs-params">( $type, $node )</span> </span>{
+		<span class="hljs-keyword">if</span> ( is_array( $node ) ) {
+
+			<span class="hljs-keyword">switch</span> ( $node ) {
+				<span class="hljs-keyword">case</span> array_key_exists( <span class="hljs-string">'is_sidebar'</span>, $node ):
+					$type = CustomTypes::sidebar();
+					<span class="hljs-keyword">break</span>;
+				<span class="hljs-keyword">case</span> array_key_exists( <span class="hljs-string">'is_widget'</span>, $node ):
+					$type = CustomTypes::widget();
+					<span class="hljs-keyword">break</span>;
+				<span class="hljs-keyword">default</span>:
+					$type = <span class="hljs-keyword">null</span>;
+			}
+
+		}
+
+		<span class="hljs-keyword">return</span> $type;
+	}
+	add_filter( <span class="hljs-string">'graphql_resolve_node_type'</span>, <span class="hljs-string">'twentyfifteen_resolve_node_type'</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Adds support for non-object type query connections</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$query_info - object holding edge data about query
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">mixed</span>
+<span>$query - The query that was made to fetch the items
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_connection_query_info</span><span class="hljs-params">( $query_info, $query )</span> </span>{
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">true</span> === is_array( $query ) ) {
+
+			$query_info[<span class="hljs-string">'total_items'</span>] = ! <span class="hljs-keyword">empty</span> ( $query ) ? count( $query ) : <span class="hljs-keyword">null</span>;
+			$query_info[<span class="hljs-string">'items'</span>] = $query;
+
+		}
+
+		<span class="hljs-keyword">return</span> $query_info;
+	}
+	add_filter( <span class="hljs-string">'graphql_connection_query_info'</span>, <span class="hljs-string">'twentyfifteen_connection_query_info'</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding Style, ThemeMods, Sidebar, and Widget queries to the WPGraphQL RootQuery</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$mutation_fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_mutations</span><span class="hljs-params">( $mutation_fields )</span> </span>{
+		<span class="hljs-keyword">require_once</span> get_template_directory() . <span class="hljs-string">'/inc/wp-graphql-types/mutation-loader.php'</span>;
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $mutation_fields[<span class="hljs-string">'deleteStyle'</span>] ) ) {
+			$mutation_fields[<span class="hljs-string">'deleteStyle'</span>] = StyleDelete::mutate();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $mutation_fields[<span class="hljs-string">'selectStyle'</span>] ) ) {
+			$mutation_fields[<span class="hljs-string">'selectStyle'</span>] = StyleSelect::mutate();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $mutation_fields[<span class="hljs-string">'updateStyle'</span>] ) ) {
+			$mutation_fields[<span class="hljs-string">'updateStyle'</span>] = StyleUpdate::mutate();
+		}
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( $mutation_fields[<span class="hljs-string">'updateThemeMods'</span>] ) ) {
+			$mutation_fields[<span class="hljs-string">'updateThemeMods'</span>] = ThemeModsUpdate::mutate();
+		}
+		<span class="hljs-keyword">return</span> $mutation_fields;
+	} 
+	add_filter( <span class="hljs-string">'graphql_root_mutations'</span>, <span class="hljs-string">'twentyfifteen_mutations'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding fields to the AllSettings Type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_all_settings_fields</span><span class="hljs-params">( $fields )</span> </span>{
+
+		
+		$fields += [
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the page_on_front setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-string">'pageOnFront'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::ID(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The page that should be displayed on the front page'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					$id = get_option( <span class="hljs-string">'page_on_front'</span>, <span class="hljs-keyword">null</span> );
+
+					<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $id ) ? Relay::toGlobalId( <span class="hljs-string">'page'</span>, $id ) : <span class="hljs-keyword">null</span>;
+				},
+			],
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the page_for_posts setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-string">'pageForPosts'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::post_object( <span class="hljs-string">'page'</span> ),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The page that displays posts'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					$id = get_option( <span class="hljs-string">'page_for_posts'</span> );
+
+					<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $id ) ? DataSource::resolve_post_object( $id, <span class="hljs-string">'page'</span> ) : <span class="hljs-keyword">null</span>;
+				},
+			],
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the show_avatar setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-string">'showAvatars'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::boolean(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'Avatar Display'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> get_option( <span class="hljs-string">'show_avatars'</span>, <span class="hljs-keyword">false</span> );
+				},
+			],
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the users_can_register setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-string">'usersCanRegister'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::boolean(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'Anyone can register'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> get_option( <span class="hljs-string">'users_can_register'</span>, <span class="hljs-keyword">false</span> );
+				},
+			],
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the permalink_structure setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		 	<span class="hljs-string">'permalinkStructure'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::string(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The structure of the blog\'s permalinks.'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> get_option( <span class="hljs-string">'permalink_structure'</span> );
+				},
+			],
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the home_url setting</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		 	<span class="hljs-string">'homeUrl'</span> =&gt; [
+				<span class="hljs-string">'type'</span> =&gt; Types::string(),
+				<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The url to current site. Use this if site is a multisite'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+					<span class="hljs-keyword">return</span> home_url();
+				},
+			],
+		];
+
+		<span class="hljs-keyword">return</span> $fields;
+
+	}
+	add_filter( <span class="hljs-string">'graphql_settings_fields'</span>, <span class="hljs-string">'twentyfifteen_all_settings_fields'</span>, <span class="hljs-number">10</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding fields to the Post Object Type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_post_object_fields</span><span class="hljs-params">( $fields )</span> </span>{
+		
+		$fields += [
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the post type object permalink field</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-string">'permalink'</span> =&gt; [
+				<span class="hljs-string">'type'</span> 				=&gt; Types::string(),
+				<span class="hljs-string">'args'</span> 				=&gt; [
+					<span class="hljs-string">'leavename'</span> =&gt; [
+						<span class="hljs-string">'type'</span> 				=&gt; Types::boolean(),
+						<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'Whether to keep post name or page name'</span>, THEME_NAME ),
+					],
+				],
+				<span class="hljs-string">'description'</span> 	=&gt; __( <span class="hljs-string">'The permalink to the post object'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( \WP_Post $post, $args )</span> </span>{
+					<span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $args[<span class="hljs-string">'leavename'</span>] ) &amp;&amp; $args[<span class="hljs-string">'leavename'</span>] ) {
+						$leavename = <span class="hljs-keyword">true</span>;
+					} <span class="hljs-keyword">else</span> {
+						$leavename = <span class="hljs-keyword">false</span>;
+					}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Strip site url for routing use</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">					$permalink = str_replace( home_url() . <span class="hljs-string">'/'</span>, <span class="hljs-string">''</span>, get_permalink( $post, $leavename ) );
+
+					<span class="hljs-keyword">return</span> ( $permalink ) ? $permalink : <span class="hljs-keyword">null</span>;
+				},
+			],
+		];
+
+		<span class="hljs-keyword">return</span> $fields;
+
+	}
+	add_filter( <span class="hljs-string">'graphql_post_fields'</span>, <span class="hljs-string">'twentyfifteen_post_object_fields'</span>, <span class="hljs-number">10</span>);
+	add_filter( <span class="hljs-string">'graphql_page_fields'</span>, <span class="hljs-string">'twentyfifteen_post_object_fields'</span>, <span class="hljs-number">10</span>);
+	add_filter( <span class="hljs-string">'graphql_attachment_fields'</span>, <span class="hljs-string">'twentyfifteen_post_object_fields'</span>, <span class="hljs-number">10</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter for adding fields related to Gutenberg Editor to the Post Object Type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_gutenberg_fields</span><span class="hljs-params">( $fields )</span> </span>{
+		
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the post type object is_guten_post field</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		$fields += [ 
+			<span class="hljs-string">'isGutenPost'</span> =&gt; [
+				<span class="hljs-string">'type'</span> 				=&gt; Types::boolean(),
+				<span class="hljs-string">'description'</span> 	=&gt; __( <span class="hljs-string">'Is post made with the Gutenberg'</span>, THEME_NAME ),
+				<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( \WP_Post $post, $args )</span> </span>{
+					$is_guten_post = preg_match(<span class="hljs-string">"/&lt;!-- wp:(.*) --&gt;/"</span>, $post-&gt;post_content ) ? <span class="hljs-keyword">true</span> : <span class="hljs-keyword">false</span>;
+					<span class="hljs-keyword">return</span> $is_guten_post;
+				},
+			],
+		];
+
+		<span class="hljs-keyword">return</span> $fields;
+
+	}
+	add_filter( <span class="hljs-string">'graphql_post_fields'</span>, <span class="hljs-string">'twentyfifteen_gutenberg_fields'</span>, <span class="hljs-number">10</span>);
+	add_filter( <span class="hljs-string">'graphql_page_fields'</span>, <span class="hljs-string">'twentyfifteen_gutenberg_fields'</span>, <span class="hljs-number">10</span>);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22"></a>
+</div>
+<p>Bug Fixes</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Fixes featuredImage resolve bug</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">\GraphQL\Type\Definition\FieldDefinition</span>
+<span>$fields
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>\GraphQL\Type\Definition\FieldDefinition
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_featured_image_bug</span><span class="hljs-params">( $fields )</span> </span>{
+		<span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span>( $fields[<span class="hljs-string">'featuredImage'</span>] ) ) { 
+			$fields[<span class="hljs-string">'featuredImage'</span>][<span class="hljs-string">'resolve'</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( \WP_Post $post, $args )</span> </span>{
+				$thumbnail_id = get_post_thumbnail_id( $post-&gt;ID );
+				<span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( $thumbnail_id ) ? DataSource::resolve_post_object( $thumbnail_id, <span class="hljs-string">'attachment'</span> ) : <span class="hljs-keyword">null</span>;
+			};
+		}
+
+		<span class="hljs-keyword">return</span> $fields;
+	}
+	add_filter( <span class="hljs-string">'graphql_post_fields'</span>, <span class="hljs-string">'twentyfifteen_featured_image_bug'</span>, <span class="hljs-number">10</span>);
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

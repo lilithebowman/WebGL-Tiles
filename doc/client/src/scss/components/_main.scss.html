@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>_main.scss</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../doc-style.css" />
+  <script src="../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../";
+    var thisFile = "client\\src\\scss\\components\\_main.scss";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>_main.scss</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">'root'</span>;
+<span class="hljs-keyword">@import</span> <span class="hljs-string">'header'</span>;
+<span class="hljs-keyword">@import</span> <span class="hljs-string">'footer'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+</div>
+<div class="body">
+<p>********** Main Styling</p>
+<hr>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+<p>MOBILE</p>
+<hr>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  <span class="hljs-selector-class">.site-main</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">padding</span>: calc(<span class="hljs-number">100vh</span> / <span class="hljs-number">20</span> - <span class="hljs-number">40px</span>) <span class="hljs-number">0</span> <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">height</span>: auto;
+    <span class="hljs-attribute">justify-content</span>: center;
+
+    <span class="hljs-selector-tag">img</span> {
+      <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>;
+      <span class="hljs-attribute">vertical-align</span>: middle;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-selector-class">.post</span>, 
+    <span class="hljs-selector-class">.page</span> {
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> calc(<span class="hljs-number">100vh</span> / <span class="hljs-number">10</span>);
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">background-color</span>: <span class="hljs-variable">$light</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+
+      <span class="hljs-selector-class">.entry-featured</span> {
+
+      }
+      <span class="hljs-selector-class">.entry-title</span> {
+
+      }
+
+      <span class="hljs-selector-class">.entry-meta</span> {
+
+      }
+      
+      <span class="hljs-selector-class">.entry-content</span> {
+        &gt; <span class="hljs-selector-tag">p</span> {
+          <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+        }
+      }
+
+      <span class="hljs-selector-class">.entry-footer</span> {
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-selector-class">.tag-links</span>,
+        <span class="hljs-selector-class">.cat-links</span> {
+          <span class="hljs-attribute">display</span>: block;
+          <span class="hljs-selector-class">.taxonomy-name</span> {
+            &amp;<span class="hljs-selector-pseudo">::after</span> { <span class="hljs-attribute">content</span>: <span class="hljs-string">": "</span>; }
+          }
+          <span class="hljs-selector-tag">a</span> {
+            &amp;<span class="hljs-selector-pseudo">::after</span> {
+              <span class="hljs-attribute">content</span>: <span class="hljs-string">", "</span>;
+            }
+
+            &amp;<span class="hljs-selector-pseudo">:last-of-type</span> {
+              &amp;<span class="hljs-selector-pseudo">::after</span> {
+                <span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+<p>TABLET</p>
+<hr>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  <span class="hljs-keyword">@include</span> media-breakpoint-up(md) {
+    <span class="hljs-selector-class">.site-main</span> {
+      <span class="hljs-attribute">padding</span>: calc(<span class="hljs-number">100vw</span> / <span class="hljs-number">25</span> - <span class="hljs-number">40px</span>) <span class="hljs-number">0</span> <span class="hljs-number">0</span>;
+    }
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+<p>DESKTOP</p>
+<hr>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  <span class="hljs-keyword">@include</span> media-breakpoint-up(lg) {
+
+    <span class="hljs-selector-class">.site-main</span> {
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">padding</span>: calc(<span class="hljs-number">100vw</span> / <span class="hljs-number">24</span>) <span class="hljs-number">0</span> <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">height</span>: auto;
+      <span class="hljs-attribute">justify-content</span>: center;
+
+      <span class="hljs-selector-class">.post</span>, 
+      <span class="hljs-selector-class">.page</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> calc(<span class="hljs-number">100vw</span> / <span class="hljs-number">16</span>) calc(<span class="hljs-number">100vw</span> / <span class="hljs-number">24</span>);
+
+        <span class="hljs-selector-class">.entry-title</span> {
+
+        }
+
+        <span class="hljs-selector-class">.entry-meta</span> {
+
+        }
+        
+        <span class="hljs-selector-class">.entry-content</span> {
+          &gt; <span class="hljs-selector-tag">p</span> {
+            <span class="hljs-attribute">padding</span>: inherit;
+          }
+        }
+
+        <span class="hljs-selector-class">.entry-footer</span> {
+          <span class="hljs-selector-class">.tag-links</span>,
+          <span class="hljs-selector-class">.cat-links</span> {
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+          }
+        }
+      }
+    }
+  }
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

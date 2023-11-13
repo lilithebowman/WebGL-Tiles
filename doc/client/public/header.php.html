@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>header.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\header.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>header.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The header for our theme</p>
+</div>
+<div class="body">
+<p>This is the template that displays all of the <head> section and everything up until <div id="content"></p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">?&gt;
+&lt;!doctype html&gt;
+&lt;html &lt;?php language_attributes(); ?&gt;&gt;
+&lt;head&gt;
+	&lt;meta charset="&lt;?php bloginfo( 'charset' ); ?&gt;"&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+	&lt;link rel="profile" href="http://gmpg.org/xfn/11"&gt;
+	&lt;?php wp_head(); ?&gt;
+	
+&lt;/head&gt;
+
+&lt;body &lt;?php body_class(); ?&gt;&gt;
+&lt;div id="page" class="site"&gt;
+	&lt;a class="skip-link screen-reader-text" href="#primary"&gt;&lt;?php esc_html_e( 'Skip to content', 'gutenbergtheme' ); ?&gt;&lt;/a&gt;
+		&lt;header id="masthead" class="site-header"&gt;
+			&lt;div class="site-branding"&gt;
+				&lt;?php
+				the_custom_logo();
+				if ( is_front_page() &amp;&amp; is_home() ) : ?&gt;
+					&lt;h1 class="site-title"&gt;&lt;a href="&lt;?php echo esc_url( home_url( '/' ) ); ?&gt;" rel="home"&gt;&lt;?php bloginfo( 'name' ); ?&gt;&lt;/a&gt;&lt;/h1&gt;
+				&lt;?php else : ?&gt;
+					&lt;p class="site-title"&gt;&lt;a href="&lt;?php echo esc_url( home_url( '/' ) ); ?&gt;" rel="home"&gt;&lt;?php bloginfo( 'name' ); ?&gt;&lt;/a&gt;&lt;/p&gt;
+				&lt;?php
+				endif;
+
+				$description = get_bloginfo( 'description', 'display' );
+				if ( $description || is_customize_preview() ) : ?&gt;
+					&lt;p class="site-description"&gt;&lt;?php echo $description; /* WPCS: xss ok. */ ?&gt;&lt;/p&gt;
+				&lt;?php
+				endif; ?&gt;
+			&lt;/div&gt;&lt;!-- .site-branding --&gt;
+
+			&lt;nav id="site-navigation" class="main-navigation"&gt;
+				&lt;button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"&gt;&lt;?php esc_html_e( 'Primary Menu', 'theme' ); ?&gt;&lt;/button&gt;
+				&lt;?php
+					wp_nav_menu( array(
+						'theme_location' =&gt; 'primary',
+						'menu_id'        =&gt; 'primary-menu',
+					) );
+				?&gt;
+			&lt;/nav&gt;&lt;!-- #site-navigation --&gt;
+		&lt;/header&gt;&lt;!-- #masthead --&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>content-page.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\public\\template-parts\\content-page.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>content-page.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Template part for displaying page content in page.php</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+?&gt;
+
+&lt;article id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;
+	&lt;header class="entry-header"&gt;
+		&lt;?php the_title( '&lt;h1 class="entry-title"&gt;', '&lt;/h1&gt;' ); ?&gt;
+	&lt;/header&gt;&lt;!-- .entry-header --&gt;
+
+	&lt;div class="entry-content"&gt;
+		&lt;?php
+			the_content();
+
+			wp_link_pages( array(
+				'before' =&gt; '&lt;div class="page-links"&gt;' . esc_html__( 'Pages:', 'gutenbergtheme' ),
+				'after'  =&gt; '&lt;/div&gt;',
+			) );
+		?&gt;
+	&lt;/div&gt;&lt;!-- .entry-content --&gt;
+
+	&lt;?php if ( get_edit_post_link() ) : ?&gt;
+		&lt;footer class="entry-footer"&gt;
+			&lt;?php
+				edit_post_link(
+					sprintf(
+						wp_kses(
+							/* translators: %s: Name of current post. Only visible to screen readers */
+							__( 'Edit &lt;span class="screen-reader-text"&gt;%s&lt;/span&gt;', 'gutenbergtheme' ),
+							array(
+								'span' =&gt; array(
+									'class' =&gt; array(),
+								),
+							)
+						),
+						get_the_title()
+					),
+					'&lt;span class="edit-link"&gt;',
+					'&lt;/span&gt;'
+				);
+			?&gt;
+		&lt;/footer&gt;&lt;!-- .entry-footer --&gt;
+	&lt;?php endif; ?&gt;
+&lt;/article&gt;&lt;!-- #post-&lt;?php the_ID(); ?&gt; --&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

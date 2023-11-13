@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WidgetInterfaceType.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../doc-style.css" />
+  <script src="../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\Widget\\WidgetInterfaceType.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>WidgetInterfaceType.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">InterfaceType</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">DataSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">WPInterfaceType</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Widget</span>\<span class="hljs-title">WidgetTypes</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class WidgetType</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WidgetInterfaceType</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WPInterfaceType</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Type name</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $type_name = <span class="hljs-string">'Widget'</span>;
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This holds the field definitions</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $fields;
+  
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This holds the type registry instance</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $registry;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>WidgetInterfaceType constructor.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span> </span>{
+		$config = [
+      <span class="hljs-string">'name'</span>        =&gt; <span class="hljs-keyword">self</span>::$type_name,
+			<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'A widget object'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+			<span class="hljs-string">'fields'</span> =&gt; <span class="hljs-keyword">self</span>::fields(),
+      <span class="hljs-string">'resolveType'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( $widget )</span> </span>{
+        <span class="hljs-keyword">if</span>( ! <span class="hljs-keyword">empty</span>( $widget[ <span class="hljs-string">'type'</span> ] ) ) {
+          <span class="hljs-keyword">return</span> WidgetTypes::{ $widget[ <span class="hljs-string">'type'</span> ] }();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>;
+			},
+		];
+
+    <span class="hljs-keyword">parent</span>::__construct( $config );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Initialize Registry</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">self</span>::$registry = <span class="hljs-keyword">new</span> WidgetTypes( <span class="hljs-keyword">self</span>::$type_name );
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This defines the fields that make up the WidgetInterfaceType.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|\Closure|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fields</span><span class="hljs-params">()</span> </span>{
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">null</span> === <span class="hljs-keyword">self</span>::$fields ) {
+
+			<span class="hljs-keyword">self</span>::$fields = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+
+        $fields = [
+          <span class="hljs-string">'id'</span>          =&gt; [
+            <span class="hljs-string">'type'</span>    =&gt; Types::non_null( Types::id() ),
+            <span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( array $widget, $args, AppContext $context, ResolveInfo $info )</span> </span>{
+              <span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $widget ) &amp;&amp; ! <span class="hljs-keyword">empty</span>( $widget[ <span class="hljs-string">'id'</span> ] ) ) ? Relay::toGlobalId( <span class="hljs-string">'widget'</span>, $widget[ <span class="hljs-string">'id'</span> ] ) : <span class="hljs-keyword">null</span>;
+            },
+          ],
+          <span class="hljs-string">'widgetId'</span>          =&gt; [
+            <span class="hljs-string">'type'</span>    =&gt; Types::string(),
+            <span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( array $widget, $args, AppContext $context, ResolveInfo $info )</span> </span>{
+              <span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $widget[ <span class="hljs-string">'id'</span> ] ) ) ? $widget[ <span class="hljs-string">'id'</span> ] : <span class="hljs-string">''</span>;
+            },
+          ],
+          <span class="hljs-string">'name'</span>          =&gt; [
+            <span class="hljs-string">'type'</span>    =&gt; Types::string(),
+            <span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( array $widget, $args, AppContext $context, ResolveInfo $info )</span> </span>{
+              <span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $widget[ <span class="hljs-string">'name'</span> ] ) ) ? $widget[ <span class="hljs-string">'name'</span> ] : <span class="hljs-string">''</span>;
+            },
+          ],
+          <span class="hljs-string">'basename'</span>          =&gt; [
+            <span class="hljs-string">'type'</span>    =&gt; Types::string(),
+            <span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( array $widget, $args, AppContext $context, ResolveInfo $info )</span> </span>{
+              <span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( $widget[ <span class="hljs-string">'type'</span> ] ) ) ? $widget[ <span class="hljs-string">'type'</span> ] : <span class="hljs-string">''</span>;
+            },
+          ],
+        ];
+
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::prepare_fields( $fields, <span class="hljs-keyword">self</span>::$type_name );
+      };
+
+    } <span class="hljs-comment">// End if().</span>
+
+    <span class="hljs-keyword">return</span> ! <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$fields ) ? <span class="hljs-keyword">self</span>::$fields : <span class="hljs-keyword">null</span>;
+
+  }
+
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

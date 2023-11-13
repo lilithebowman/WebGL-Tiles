@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>template-tags.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../doc-style.css" />
+  <script src="../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../";
+    var thisFile = "client\\public\\inc\\template-tags.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>template-tags.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Custom template tags for this theme</p>
+</div>
+<div class="body">
+<p>Eventually, some of the functionality here could be replaced by core features.</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+<span class="hljs-keyword">if</span> ( ! function_exists( <span class="hljs-string">'gutenbergtheme_posted_on'</span> ) ) :
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Prints HTML with meta information for the current post-date/time and author.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gutenbergtheme_posted_on</span><span class="hljs-params">()</span> </span>{
+		$time_string = <span class="hljs-string">'&lt;time class="entry-date published updated" datetime="%1$s"&gt;%2$s&lt;/time&gt;'</span>;
+		<span class="hljs-keyword">if</span> ( get_the_time( <span class="hljs-string">'U'</span> ) !== get_the_modified_time( <span class="hljs-string">'U'</span> ) ) {
+			$time_string = <span class="hljs-string">'&lt;time class="entry-date published" datetime="%1$s"&gt;%2$s&lt;/time&gt;&lt;time class="updated" datetime="%3$s"&gt;%4$s&lt;/time&gt;'</span>;
+		}
+
+		$time_string = sprintf( $time_string,
+			esc_attr( get_the_date( <span class="hljs-string">'c'</span> ) ),
+			esc_html( get_the_date() ),
+			esc_attr( get_the_modified_date( <span class="hljs-string">'c'</span> ) ),
+			esc_html( get_the_modified_date() )
+		);
+
+		$posted_on = sprintf(
+			<span class="hljs-comment">/* translators: %s: post date. */</span>
+			esc_html_x( <span class="hljs-string">'Posted on %s'</span>, <span class="hljs-string">'post date'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+			<span class="hljs-string">'&lt;a href="'</span> . esc_url( get_permalink() ) . <span class="hljs-string">'" rel="bookmark"&gt;'</span> . $time_string . <span class="hljs-string">'&lt;/a&gt;'</span>
+		);
+
+		$byline = sprintf(
+			<span class="hljs-comment">/* translators: %s: post author. */</span>
+			esc_html_x( <span class="hljs-string">'by %s'</span>, <span class="hljs-string">'post author'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+			<span class="hljs-string">'&lt;span class="author vcard"&gt;&lt;a class="url fn n" href="'</span> . esc_url( get_author_posts_url( get_the_author_meta( <span class="hljs-string">'ID'</span> ) ) ) . <span class="hljs-string">'"&gt;'</span> . esc_html( get_the_author() ) . <span class="hljs-string">'&lt;/a&gt;&lt;/span&gt;'</span>
+		);
+
+		<span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;span class="posted-on"&gt;'</span> . $posted_on . <span class="hljs-string">'&lt;/span&gt;&lt;span class="byline"&gt; '</span> . $byline . <span class="hljs-string">'&lt;/span&gt;'</span>; <span class="hljs-comment">// WPCS: XSS OK.</span>
+
+	}
+<span class="hljs-keyword">endif</span>;
+
+<span class="hljs-keyword">if</span> ( ! function_exists( <span class="hljs-string">'gutenbergtheme_entry_footer'</span> ) ) :
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Prints HTML with meta information for the categories, tags and comments.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gutenbergtheme_entry_footer</span><span class="hljs-params">()</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>Hide category and tag text for pages.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		<span class="hljs-keyword">if</span> ( <span class="hljs-string">'post'</span> === get_post_type() ) {
+			<span class="hljs-comment">/* translators: used between list items, there is a space after the comma */</span>
+			$categories_list = get_the_category_list( esc_html__( <span class="hljs-string">', '</span>, <span class="hljs-string">'gutenbergtheme'</span> ) );
+			<span class="hljs-keyword">if</span> ( $categories_list ) {
+				<span class="hljs-comment">/* translators: 1: list of categories. */</span>
+				printf( <span class="hljs-string">'&lt;span class="cat-links"&gt;'</span> . esc_html__( <span class="hljs-string">'Posted in %1$s'</span>, <span class="hljs-string">'gutenbergtheme'</span> ) . <span class="hljs-string">'&lt;/span&gt;'</span>, $categories_list ); <span class="hljs-comment">// WPCS: XSS OK.</span>
+			}
+
+			<span class="hljs-comment">/* translators: used between list items, there is a space after the comma */</span>
+			$tags_list = get_the_tag_list( <span class="hljs-string">''</span>, esc_html_x( <span class="hljs-string">', '</span>, <span class="hljs-string">'list item separator'</span>, <span class="hljs-string">'gutenbergtheme'</span> ) );
+			<span class="hljs-keyword">if</span> ( $tags_list ) {
+				<span class="hljs-comment">/* translators: 1: list of tags. */</span>
+				printf( <span class="hljs-string">'&lt;span class="tags-links"&gt;'</span> . esc_html__( <span class="hljs-string">'Tagged %1$s'</span>, <span class="hljs-string">'gutenbergtheme'</span> ) . <span class="hljs-string">'&lt;/span&gt;'</span>, $tags_list ); <span class="hljs-comment">// WPCS: XSS OK.</span>
+			}
+		}
+
+		<span class="hljs-keyword">if</span> ( ! is_single() &amp;&amp; ! post_password_required() &amp;&amp; ( comments_open() || get_comments_number() ) ) {
+			<span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;span class="comments-link"&gt;'</span>;
+			comments_popup_link(
+				sprintf(
+					wp_kses(
+						<span class="hljs-comment">/* translators: %s: post title */</span>
+						__( <span class="hljs-string">'Leave a Comment&lt;span class="screen-reader-text"&gt; on %s&lt;/span&gt;'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+						<span class="hljs-keyword">array</span>(
+							<span class="hljs-string">'span'</span> =&gt; <span class="hljs-keyword">array</span>(
+								<span class="hljs-string">'class'</span> =&gt; <span class="hljs-keyword">array</span>(),
+							),
+						)
+					),
+					get_the_title()
+				)
+			);
+			<span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;/span&gt;'</span>;
+		}
+
+		edit_post_link(
+			sprintf(
+				wp_kses(
+					<span class="hljs-comment">/* translators: %s: Name of current post. Only visible to screen readers */</span>
+					__( <span class="hljs-string">'Edit &lt;span class="screen-reader-text"&gt;%s&lt;/span&gt;'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+					<span class="hljs-keyword">array</span>(
+						<span class="hljs-string">'span'</span> =&gt; <span class="hljs-keyword">array</span>(
+							<span class="hljs-string">'class'</span> =&gt; <span class="hljs-keyword">array</span>(),
+						),
+					)
+				),
+				get_the_title()
+			),
+			<span class="hljs-string">'&lt;span class="edit-link"&gt;'</span>,
+			<span class="hljs-string">'&lt;/span&gt;'</span>
+		);
+	}
+<span class="hljs-keyword">endif</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

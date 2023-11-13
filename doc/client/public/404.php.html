@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>404.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\404.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>404.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The template for displaying 404 pages (not found)</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+get_header(); ?&gt;
+	
+	&lt;main id="primary" class="site-main"&gt;
+
+		&lt;section class="error-404 not-found"&gt;
+			&lt;header class="page-header"&gt;
+				&lt;h1 class="page-title"&gt;&lt;?php esc_html_e( 'Oops! That page can&amp;rsquo;t be found.', 'gutenbergtheme' ); ?&gt;&lt;/h1&gt;
+			&lt;/header&gt;&lt;!-- .page-header --&gt;
+
+			&lt;div class="page-content"&gt;
+				&lt;p&gt;&lt;?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'gutenbergtheme' ); ?&gt;&lt;/p&gt;
+
+				&lt;?php
+					get_search_form();
+
+					the_widget( 'WP_Widget_Recent_Posts' );
+				?&gt;
+
+				&lt;div class="widget widget_categories"&gt;
+					&lt;h2 class="widget-title"&gt;&lt;?php esc_html_e( 'Most Used Categories', 'gutenbergtheme' ); ?&gt;&lt;/h2&gt;
+					&lt;ul&gt;
+					&lt;?php
+						wp_list_categories( array(
+							'orderby'    =&gt; 'count',
+							'order'      =&gt; 'DESC',
+							'show_count' =&gt; 1,
+							'title_li'   =&gt; '',
+							'number'     =&gt; 10,
+						) );
+					?&gt;
+					&lt;/ul&gt;
+				&lt;/div&gt;&lt;!-- .widget --&gt;
+
+				&lt;?php
+
+					/* translators: %1$s: smiley */
+					$archive_content = '&lt;p&gt;' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'gutenbergtheme' ), convert_smilies( ':)' ) ) . '&lt;/p&gt;';
+					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=&lt;/h2&gt;$archive_content" );
+
+					the_widget( 'WP_Widget_Tag_Cloud' );
+				?&gt;
+
+			&lt;/div&gt;&lt;!-- .page-content --&gt;
+		&lt;/section&gt;&lt;!-- .error-404 --&gt;
+
+	&lt;/main&gt;&lt;!-- #primary --&gt;
+
+&lt;?php
+get_footer();
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

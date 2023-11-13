@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StyleUpdate.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../../doc-style.css" />
+  <script src="../../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\Style\\Mutation\\StyleUpdate.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>StyleUpdate.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Style</span>\<span class="hljs-title">Mutation</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Error</span>\<span class="hljs-title">UserError</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">TwentyFifteen</span>\<span class="hljs-title">Stylist</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">DataSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">WPInputObjectType</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class StyleUpdate</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StyleUpdate</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the mutation field definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $mutation = [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Defines the update mutation for Style</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array|mixed
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mutate</span><span class="hljs-params">()</span> </span>{
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$mutation ) ) {
+      $mutation_name  = <span class="hljs-string">'UpdateStyle'</span>;
+			<span class="hljs-keyword">self</span>::$mutation = Relay::mutationWithClientMutationId( [
+        <span class="hljs-string">'name'</span>                =&gt; $mutation_name,
+				<span class="hljs-string">'description'</span>         =&gt; __( <span class="hljs-string">'Update theme styles'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				<span class="hljs-string">'inputFields'</span>         =&gt; WPInputObjectType::prepare_fields( <span class="hljs-keyword">self</span>::input_fields(), $mutation_name ),
+				<span class="hljs-string">'outputFields'</span>        =&gt; [
+					<span class="hljs-string">'style'</span> =&gt; [
+						<span class="hljs-string">'type'</span>    =&gt; Types::list_of( Types::style() ),
+						<span class="hljs-string">'resolve'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( $payload )</span> </span>{
+              
+						},
+					],
+        ],
+        <span class="hljs-string">'mutateAndGetPayload'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( $input, AppContext $context, ResolveInfo $info )</span> </span>{
+
+        },
+      ] );
+    }
+    
+    <span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$mutation ) ) ? <span class="hljs-keyword">self</span>::$mutation : <span class="hljs-keyword">null</span>;
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">input_fields</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> array_merge(
+      StyleMutation::input_fields(),
+      [
+        <span class="hljs-string">'catalog'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'String representation of style settings'</span> ),
+        ]
+      ]
+    );
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

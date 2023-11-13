@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>footer.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\footer.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>footer.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The template for displaying the footer</p>
+</div>
+<div class="body">
+<p>Contains the closing of the #content div and all content after.</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+?&gt;
+
+&lt;footer id="colophon" class="site-footer"&gt;
+	&lt;div class="site-info"&gt;
+		&lt;div id="social-menu" class="social-menu"&gt;
+			&lt;button class="menu-toggle" aria-controls="social" aria-expanded="false"&gt;&lt;?php esc_html_e( 'Social Menu', 'theme' ); ?&gt;&lt;/button&gt;
+			&lt;?php
+				wp_nav_menu( array(
+					'theme_location' =&gt; 'social',
+					'menu_id'        =&gt; 'social-menu',
+				) );
+			?&gt;
+		&lt;/nav&gt;&lt;!-- #site-navigation --&gt;
+	&lt;/div&gt;&lt;!-- .site-info --&gt;
+&lt;/footer&gt;&lt;!-- #colophon --&gt;
+&lt;/div&gt;&lt;!-- #page --&gt;
+&lt;?php wp_footer(); ?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

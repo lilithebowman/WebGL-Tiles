@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>_root.scss</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../doc-style.css" />
+  <script src="../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../";
+    var thisFile = "client\\src\\scss\\components\\_root.scss";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>_root.scss</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+</div>
+<div class="body">
+<p>********** Root Element Styling</p>
+<hr>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">
+<span class="hljs-selector-id">#page</span>, <span class="hljs-selector-id">#root</span> {
+  <span class="hljs-attribute">overflow-x</span>: hidden;
+  &amp;<span class="hljs-selector-class">.loaded</span> {
+    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+  }
+
+  <span class="hljs-selector-class">.app-body</span> {
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">100vh</span>;
+    * {
+      <span class="hljs-attribute">box-sizing</span>: border-box;
+    }
+  }
+}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<hr>
+<p>DESKTOP</p>
+<hr>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss"><span class="hljs-keyword">@include</span> media-breakpoint-up(lg) {
+  <span class="hljs-selector-class">.app-body</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+
+    &amp;<span class="hljs-selector-pseudo">::before</span> {
+      <span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;
+      <span class="hljs-keyword">@include</span> make-col-ready();
+      <span class="hljs-keyword">@include</span> make-col(<span class="hljs-number">5</span>, <span class="hljs-number">16</span>);
+      <span class="hljs-attribute">position</span>: fixed;
+      <span class="hljs-attribute">background-color</span>: <span class="hljs-variable">$light</span>;
+      <span class="hljs-attribute">border-right</span>: <span class="hljs-number">0.085em</span> solid darken( <span class="hljs-variable">$gray-400</span>, .<span class="hljs-number">3em</span> );
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+    }
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

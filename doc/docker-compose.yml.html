@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>docker-compose.yml</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "docker-compose.yml";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>docker-compose.yml</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<p>This file provides a local environment that is <em>separate</em> and <em>isolated</em> from
+the one provided by docker-compose.yml. This allows you to have one
+environment for automated tests and another for user testing / browsing.</p>
+<p>Edit your /etc/hosts file to add an entry for wpgraphql.example, e.g.:</p>
+<p>127.0.0.1 localhost wpgraphql.example</p>
+<p>Next, start the environment. The <code>-f</code> flag is necessary to restrict your
+commands to this docker-compose file:</p>
+<p>docker-compose -f docker-compose.dev.yml up -d</p>
+<p>After about 30 seconds, you will be able to access http://wpgraphql.example
+in your browser.</p>
+<p>Stop the environment with:</p>
+<p>docker-compose -f docker-compose.dev.yml stop</p>
+<p>NOTE: If you experience issues starting the environment, make sure you're either logged out of Docker completely
+or are logged in with proper credentials. If you were logged in and your credentials are invalid, the setup will
+fail. You can logout of Docker with the following command:</p>
+<p>docker logout</p>
+<p>And login to Docker with the following command:</p>
+<p>docker login</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">
+<span class="hljs-attr">version:</span> <span class="hljs-string">"3"</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">wpgraphql:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">"wordpress:${WP_VERSION:-4.9.8}-php${PHP_VERSION:-7.2}-apache"</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">mysql</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">VIRTUAL_HOST:</span> <span class="hljs-string">"wpgraphql.example"</span>
+      <span class="hljs-attr">WORDPRESS_DB_HOST:</span> <span class="hljs-string">"mysql"</span>
+      <span class="hljs-attr">WORDPRESS_DB_NAME:</span> <span class="hljs-string">"wpgraphql"</span>
+      <span class="hljs-attr">WORDPRESS_DB_PASSWORD:</span> <span class="hljs-string">"testing"</span>
+      <span class="hljs-attr">WORDPRESS_DB_USER:</span> <span class="hljs-string">"root"</span>
+      <span class="hljs-attr">WORDPRESS_DEBUG:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">WORDPRESS_CONFIG_EXTRA:</span> <span class="hljs-string">|
+        define( 'WP_DEFAULT_THEME', 'dev-theme' );
+</span>
+    <span class="hljs-attr">networks:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"dev"</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./client/build:/var/www/html/wp-content/themes/wpgraphql-theme"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./client/public:/var/www/html/wp-content/themes/dev-theme"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/vendor/wp-graphql/wp-graphiql:/var/www/html/wp-content/plugins/wp-graphiql"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/vendor/wp-graphql/wp-graphql:/var/www/html/wp-content/plugins/wp-graphql"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/src:/var/www/html/wp-content/plugins/wpgraphql-settings"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/vendor/wp-graphql/wp-graphql-jwt-authentication:/var/www/html/wp-content/plugins/wp-graphql-jwt-authentication"</span>
+  <span class="hljs-attr">mysql:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">"mariadb:10.2"</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MYSQL_DATABASE:</span> <span class="hljs-string">"wpgraphql"</span>
+      <span class="hljs-attr">MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">"testing"</span>
+    <span class="hljs-attr">networks:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"dev"</span>
+  <span class="hljs-attr">proxy:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">"jwilder/nginx-proxy:alpine"</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"8000:80"</span>
+    <span class="hljs-attr">networks:</span>
+      <span class="hljs-attr">dev:</span>
+        <span class="hljs-attr">aliases:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">"wpgraphql.example"</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"/var/run/docker.sock:/tmp/docker.sock:ro"</span>
+
+<span class="hljs-attr">networks:</span>
+  <span class="hljs-attr">dev:</span> <span class="hljs-string">{}</span>
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

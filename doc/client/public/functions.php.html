@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>functions.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\functions.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>functions.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>TwentyFifteen with React-Apollo functions and definitions</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Theme Constants</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">if</span>( ! defined( <span class="hljs-string">'THEME_NAME'</span> ) ) {
+		define( <span class="hljs-string">'THEME_NAME'</span>, <span class="hljs-string">'twentyfifteen-react-apollo'</span> );		
+	}
+
+	<span class="hljs-keyword">if</span>( ! defined( <span class="hljs-string">'THEME_VERSION'</span> ) ) {
+		define( <span class="hljs-string">'THEME_VERSION'</span>, <span class="hljs-string">'0.2.0'</span> );		
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Checks for installation WPGraphQL-related plug-ins</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_check_dependencies</span><span class="hljs-params">()</span> </span>{
+
+		$error = <span class="hljs-keyword">null</span>;
+
+		<span class="hljs-keyword">if</span> (! defined( <span class="hljs-string">'WPGRAPHQL_VERSION'</span> ) ) {
+			$error = <span class="hljs-keyword">new</span> WP_Error( <span class="hljs-string">'missing_dependency'</span>, sprintf( __( <span class="hljs-string">"WPGraphQL must be installed and activated to use the %s theme"</span>, <span class="hljs-string">"example"</span> ), THEME_NAME ) );
+		} 
+
+		<span class="hljs-keyword">if</span> (! defined( <span class="hljs-string">'WPGRAPHQL_JWT_AUTHENTICATION_VERSION'</span> ) ) {
+			$error = <span class="hljs-keyword">new</span> WP_Error( <span class="hljs-string">'missing_dependency'</span>, sprintf( __( <span class="hljs-string">"WPGraphQL JWT Authentication must be installed and activated to use the %s theme"</span>, <span class="hljs-string">"example"</span> ), THEME_NAME ) );
+		}
+
+		<span class="hljs-keyword">if</span> ( is_wp_error( $error ) ) {
+			<span class="hljs-keyword">echo</span> $error-&gt;get_error_message();
+		}
+
+	}
+	add_action( <span class="hljs-string">'after_setup_theme'</span>, <span class="hljs-string">'twentyfifteen_check_dependencies'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Checks if WPGraphQL-related plugins are active</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_check_active</span><span class="hljs-params">()</span> </span>{
+
+		$error = <span class="hljs-keyword">null</span>;
+
+		<span class="hljs-keyword">if</span> ( ! is_plugin_active( WPGRAPHQL_PLUGIN_DIR ) ) {
+			$error = <span class="hljs-keyword">new</span> WP_Error( <span class="hljs-string">'missing_dependency'</span>, sprintf( __( <span class="hljs-string">"WPGraphQL must be activated to use the %s theme"</span>, <span class="hljs-string">"example"</span> ), THEME_NAME ) );
+		} 
+
+		<span class="hljs-keyword">if</span> ( ! is_plugin_active( WPGRAPHQL_JWT_AUTHENTICATION_PLUGIN_DIR ) ) {
+			$error = <span class="hljs-keyword">new</span> WP_Error( <span class="hljs-string">'missing_dependency'</span>, sprintf( __( <span class="hljs-string">"WPGraphQL JWT Authentication must be activated to use the %s theme"</span>, <span class="hljs-string">"example"</span> ), THEME_NAME ) );
+		}
+
+		<span class="hljs-keyword">if</span> ( is_wp_error( $error ) ) {
+			<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">Exception</span>( $error-&gt;get_error_message() );
+		}
+
+	}
+	add_action( <span class="hljs-string">'plugins_loaded'</span>, <span class="hljs-string">'twentyfifteen_check_active'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Sets up defaults and registers</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_setup</span><span class="hljs-params">()</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Make theme available for translation.
+Translations can be filed in the /languages/ directory.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		load_theme_textdomain( THEME_NAME, get_template_directory() . <span class="hljs-string">'/languages'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<p>Add default posts and comments RSS feed links to head.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		add_theme_support( <span class="hljs-string">'automatic-feed-links'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Let WordPress manage the document title.
+By adding theme support, we declare that this theme does not use a
+hard-coded <title> tag in the document head, and expect WordPress to
+provide it for us.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		add_theme_support( <span class="hljs-string">'title-tag'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Enable support for Post Thumbnails on posts and pages.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		add_theme_support( <span class="hljs-string">'post-thumbnails'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Add support for core custom logo.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		add_theme_support( <span class="hljs-string">'custom-logo'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Add support for Gutenburg Styling</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		add_theme_support( <span class="hljs-string">'align-wide'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Register Menu</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		register_nav_menus(
+			<span class="hljs-keyword">array</span>(
+				<span class="hljs-string">'primary'</span> =&gt; __( <span class="hljs-string">'Primary Menu'</span> ),
+				<span class="hljs-string">'social'</span> =&gt; __( <span class="hljs-string">'Social Links Menu'</span> )
+			 )
+		 );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
+</div>
+<p>Adding support for core block visual styles.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			add_theme_support( <span class="hljs-string">'wp-block-styles'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<p>Add support for full and wide align images.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			add_theme_support( <span class="hljs-string">'align-wide'</span> );
+			
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<p>Add support for custom color scheme.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			add_theme_support( <span class="hljs-string">'editor-color-palette'</span>, <span class="hljs-keyword">array</span>(
+				<span class="hljs-keyword">array</span>(
+					<span class="hljs-string">'name'</span>  =&gt; __( <span class="hljs-string">'Strong Blue'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+					<span class="hljs-string">'slug'</span>  =&gt; <span class="hljs-string">'strong-blue'</span>,
+					<span class="hljs-string">'color'</span> =&gt; <span class="hljs-string">'#0073aa'</span>,
+				),
+				<span class="hljs-keyword">array</span>(
+					<span class="hljs-string">'name'</span>  =&gt; __( <span class="hljs-string">'Lighter Blue'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+					<span class="hljs-string">'slug'</span>  =&gt; <span class="hljs-string">'lighter-blue'</span>,
+					<span class="hljs-string">'color'</span> =&gt; <span class="hljs-string">'#229fd8'</span>,
+				),
+				<span class="hljs-keyword">array</span>(
+					<span class="hljs-string">'name'</span>  =&gt; __( <span class="hljs-string">'Very Light Gray'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+					<span class="hljs-string">'slug'</span>  =&gt; <span class="hljs-string">'very-light-gray'</span>,
+					<span class="hljs-string">'color'</span> =&gt; <span class="hljs-string">'#eee'</span>,
+				),
+				<span class="hljs-keyword">array</span>(
+					<span class="hljs-string">'name'</span>  =&gt; __( <span class="hljs-string">'Very Dark Gray'</span>, <span class="hljs-string">'gutenbergtheme'</span> ),
+					<span class="hljs-string">'slug'</span>  =&gt; <span class="hljs-string">'very-dark-gray'</span>,
+					<span class="hljs-string">'color'</span> =&gt; <span class="hljs-string">'#444'</span>,
+				),
+			) );
+
+	 }
+	 add_action( <span class="hljs-string">'after_setup_theme'</span>, <span class="hljs-string">'twentyfifteen_setup'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Set the content width in pixels, based on the theme's design and stylesheet.</p>
+</div>
+<div class="body">
+<p>Priority 0 to make it available to lower priority callbacks.</p>
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gutenbergtheme_content_width</span><span class="hljs-params">()</span> </span>{
+		$GLOBALS[<span class="hljs-string">'content_width'</span>] = apply_filters( <span class="hljs-string">'gutenbergtheme_content_width'</span>, <span class="hljs-number">640</span> );
+	}
+	add_action( <span class="hljs-string">'after_setup_theme'</span>, <span class="hljs-string">'gutenbergtheme_content_width'</span>, <span class="hljs-number">0</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Register Google Fonts</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gutenbergtheme_fonts_url</span><span class="hljs-params">()</span> </span>{
+		$fonts_url = <span class="hljs-string">''</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Translators: If there are characters in your language that are not
+supported by Noto Serif, translate this to 'off'. Do not translate
+into your own language.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		$notoserif = esc_html_x( <span class="hljs-string">'on'</span>, <span class="hljs-string">'Noto Serif font: on or off'</span>, <span class="hljs-string">'gutenbergtheme'</span> );
+		<span class="hljs-keyword">if</span> ( <span class="hljs-string">'off'</span> !== $notoserif ) {
+
+			$font_families = <span class="hljs-keyword">array</span>();
+			$font_families[] = <span class="hljs-string">'Noto Serif:400,400italic,700,700italic'</span>;
+
+			$query_args = <span class="hljs-keyword">array</span>(
+				<span class="hljs-string">'family'</span> =&gt; urlencode( implode( <span class="hljs-string">'|'</span>, $font_families ) ),
+				<span class="hljs-string">'subset'</span> =&gt; urlencode( <span class="hljs-string">'latin,latin-ext'</span> ),
+			);
+
+			$fonts_url = add_query_arg( $query_args, <span class="hljs-string">'https://fonts.googleapis.com/css'</span> );
+		}
+
+		<span class="hljs-keyword">return</span> $fonts_url;
+	}
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Register widget area.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_widgets_init</span><span class="hljs-params">()</span> </span>{
+		register_sidebar(
+			<span class="hljs-keyword">array</span>(
+				<span class="hljs-string">'name'</span>          =&gt; __( <span class="hljs-string">'Widget Area'</span>, THEME_NAME ),
+				<span class="hljs-string">'id'</span>            =&gt; <span class="hljs-string">'sidebar-1'</span>,
+				<span class="hljs-string">'description'</span>   =&gt; __( <span class="hljs-string">'Add widgets here to appear in your sidebar.'</span>, THEME_NAME ),
+			)
+		);
+	}
+	add_action( <span class="hljs-string">'widgets_init'</span>, <span class="hljs-string">'twentyfifteen_widgets_init'</span> );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Queues up theme JS and CSS files to be loaded.</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">twentyfifteen_enqueue_scripts</span><span class="hljs-params">()</span> </span>{
+
+		wp_enqueue_style( <span class="hljs-string">'theme-docs'</span>, get_stylesheet_uri() );
+		
+		<span class="hljs-keyword">if</span>( file_exists( gutenbergtheme_fonts_url() ) ) {
+			wp_enqueue_style( <span class="hljs-string">'gutenbergtheme-fonts'</span>, gutenbergtheme_fonts_url() );
+		}
+
+		<span class="hljs-keyword">if</span>( file_exists( get_template_directory() . <span class="hljs-string">'/asset-manifest.json'</span> ) ) {
+			$assets = json_decode( file_get_contents( get_template_directory() . <span class="hljs-string">'/asset-manifest.json'</span> ), <span class="hljs-keyword">true</span> );
+			
+			wp_enqueue_style( <span class="hljs-string">'main-style'</span>, get_template_directory_uri() . <span class="hljs-string">'/'</span> . $assets[<span class="hljs-string">'main.css'</span>] );
+			wp_enqueue_script( <span class="hljs-string">'twentyfifteen-react-script'</span>, get_template_directory_uri() . <span class="hljs-string">'/'</span> . $assets[<span class="hljs-string">'main.js'</span>], <span class="hljs-keyword">array</span>(), THEME_VERSION, <span class="hljs-keyword">true</span> );
+		} <span class="hljs-keyword">else</span> {
+
+			wp_enqueue_style( <span class="hljs-string">'gutenbergtheme-style'</span>, get_template_directory_uri() . <span class="hljs-string">'/css/main.css'</span> );
+			wp_enqueue_style( <span class="hljs-string">'gutenbergthemeblocks-style'</span>, get_template_directory_uri() . <span class="hljs-string">'/css/blocks.css'</span> );
+		
+		}
+
+		<span class="hljs-keyword">if</span> ( is_singular() &amp;&amp; comments_open() &amp;&amp; get_option( <span class="hljs-string">'thread_comments'</span> ) ) {
+			wp_enqueue_script( <span class="hljs-string">'comment-reply'</span> );
+		}
+
+	}
+	add_action( <span class="hljs-string">'wp_enqueue_scripts'</span>, <span class="hljs-string">'twentyfifteen_enqueue_scripts'</span> );
+	
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Implement the Custom Header feature.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">require</span> get_template_directory() . <span class="hljs-string">'/inc/custom-header.php'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Custom template tags for this theme.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">require</span> get_template_directory() . <span class="hljs-string">'/inc/template-tags.php'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-24" id="section-24"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Functions which enhance the theme by hooking into WordPress.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">require</span> get_template_directory() . <span class="hljs-string">'/inc/template-functions.php'</span>;
+	
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Adds Customizr settings</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">require</span> get_template_directory() . <span class="hljs-string">'/inc/stylist.php'</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-26" id="section-26"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Adds GraphQL schema modifications</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">require</span> get_template_directory() . <span class="hljs-string">'/inc/wp-graphql.php'</span>;
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

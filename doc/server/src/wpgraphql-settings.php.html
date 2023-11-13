@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>wpgraphql-settings.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "server\\src\\wpgraphql-settings.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>wpgraphql-settings.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Plugin Name: WPGraphQL Test Settings
+Version: 0.0.1
+Description: Sets up WPGraphQL test environment
+Author: Geoff Taylor
+Author URI: https://axistaylor.com
+Plugin URI: https://axistaylor.com
+Text Domain: wp-graphql-test
+Domain Path: /languages</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+  <span class="hljs-keyword">new</span> WPGraphQLSettingsTest();
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WPGraphQLSettingsTest</span> </span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">$this</span>-&gt;constants();
+
+      register_activation_hook( <span class="hljs-keyword">__FILE__</span>, <span class="hljs-keyword">array</span>( &amp;<span class="hljs-keyword">$this</span>, <span class="hljs-string">'activate'</span> ) );
+      register_deactivation_hook( <span class="hljs-keyword">__FILE__</span>, <span class="hljs-keyword">array</span>( &amp;<span class="hljs-keyword">$this</span>, <span class="hljs-string">'deactivate'</span> ) );
+      <span class="hljs-keyword">$this</span>-&gt;actions_and_filters();
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">constants</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">if</span>( ! defined(<span class="hljs-string">'WPG_VERSION'</span>) ) {
+        define(<span class="hljs-string">'WPG_VERSION'</span>, <span class="hljs-string">'0.0.1'</span>);
+      }
+
+      <span class="hljs-keyword">if</span>( ! defined(<span class="hljs-string">'WPG_PATH'</span>) ) {
+        define( <span class="hljs-string">'WPG_PATH'</span>, plugin_dir_path(<span class="hljs-keyword">__FILE__</span>) );
+      }
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Adds actions and filters in one place</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">actions_and_filters</span><span class="hljs-params">()</span> </span>{
+      add_action( <span class="hljs-string">'init'</span>, <span class="hljs-keyword">array</span>( &amp;<span class="hljs-keyword">$this</span>, <span class="hljs-string">'init'</span> ) );
+      add_action( <span class="hljs-string">'admin_init'</span>, <span class="hljs-keyword">array</span>( &amp;<span class="hljs-keyword">$this</span>, <span class="hljs-string">'admin_init'</span> ) );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>Add GraphQL Secret</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      add_filter( <span class="hljs-string">'graphql_jwt_auth_secret_key'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'{LKO?wh,8HXwa$QjMR&amp;*J{Q/^D&amp;nKtkt(fu-V]f+6a^.0;O.IXP6,zYZ5WGH-i?*'</span>;
+      });
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Run this on every page load</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">global</span> $wp_rewrite;
+      $wp_rewrite-&gt;set_permalink_structure( <span class="hljs-string">'/%year%/%monthnum%/%postname%/'</span> );
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>do stuff when the admin interface is loaded…</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">admin_init</span><span class="hljs-params">()</span> </span>{
+
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stuff to do when this plugin is activated</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">activate</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">$this</span>-&gt;activate_dependencies();
+      <span class="hljs-keyword">$this</span>-&gt;create_demo_posts();
+      <span class="hljs-keyword">$this</span>-&gt;create_demo_pages();
+      <span class="hljs-keyword">$this</span>-&gt;create_demo_menus();
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stuff to do when this plugin is deactivated (cleanup and leave it as you found it)</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deactivate</span><span class="hljs-params">()</span> </span>{
+      
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Activate WPGraphQL-related plugins</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">activate_dependencies</span><span class="hljs-params">()</span> </span>{
+      activate_plugin(<span class="hljs-string">'wp-graphql/wp-graphql.php'</span>);
+      activate_plugin(<span class="hljs-string">'wp-graphiql/wp-graphiql.php'</span>);
+      activate_plugin(<span class="hljs-string">'wp-graphql-jwt-authentication/wp-graphql-jwt-authentication.php'</span>);
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create_demo_pages</span><span class="hljs-params">()</span> </span>{
+      $about = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/about.html'</span>, <span class="hljs-keyword">true</span> );
+      wp_insert_post( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+        <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'About Twenty Fifteen'</span>,
+        <span class="hljs-string">'post_content'</span>  =&gt; $about,
+        <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+        <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'about-twenty-fifteen'</span>
+      ) );
+
+      $readability = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/readability.html'</span>, <span class="hljs-keyword">true</span> );
+      wp_insert_post( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+        <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'Readability'</span>,
+        <span class="hljs-string">'post_content'</span>  =&gt; $readability,
+        <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+        <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'readability'</span>
+      ) );
+
+      $image_alignment_and_styles = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/image-alignment-and-styles.html'</span>, <span class="hljs-keyword">true</span> );
+      wp_insert_post( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+        <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'Image Alignment and Styles'</span>,
+        <span class="hljs-string">'post_content'</span>  =&gt; $image_alignment_and_styles,
+        <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+        <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'image-alignment-and-styles'</span>
+      ) );
+
+      $html_elements = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/html-elements.html'</span>, <span class="hljs-keyword">true</span> );
+      wp_insert_post( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+        <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'HTML Elements'</span>,
+        <span class="hljs-string">'post_content'</span>  =&gt; $html_elements,
+        <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+        <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'html-elements'</span>
+      ) );
+
+      $parent_page = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/parent-page.html'</span>, <span class="hljs-keyword">true</span> );
+      $parent_id = wp_insert_post( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+        <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'A Parent Page'</span>,
+        <span class="hljs-string">'post_content'</span>  =&gt; $parent_page,
+        <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+        <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'a-parent-page'</span>
+      ) );
+
+      <span class="hljs-keyword">if</span> ( $parent_id ) {
+        $first_page = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/first-page.html'</span>, <span class="hljs-keyword">true</span> );
+        wp_insert_post( <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+          <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'First Child'</span>,
+          <span class="hljs-string">'post_content'</span>  =&gt; $first_page,
+          <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+          <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'first-child'</span>,
+          <span class="hljs-string">'post_parent'</span>   =&gt;  $parent_id,
+          <span class="hljs-string">'menu_order'</span>    =&gt;  <span class="hljs-number">0</span>
+        ) );
+
+        $second_page = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/second-page.html'</span>, <span class="hljs-keyword">true</span> );
+        wp_insert_post( <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+          <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'Second Child'</span>,
+          <span class="hljs-string">'post_content'</span>  =&gt; $second_page,
+          <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+          <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'second-child'</span>,
+          <span class="hljs-string">'post_parent'</span>   =&gt;  $parent_id,
+          <span class="hljs-string">'menu_order'</span>    =&gt;  <span class="hljs-number">1</span>
+        ) );
+
+        $third_page = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/third-page.html'</span>, <span class="hljs-keyword">true</span> );
+        wp_insert_post( <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+          <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'Third Child'</span>,
+          <span class="hljs-string">'post_content'</span>  =&gt; $third_page,
+          <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+          <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'third-child'</span>,
+          <span class="hljs-string">'post_parent'</span>   =&gt;  $parent_id,
+          <span class="hljs-string">'menu_order'</span>    =&gt;  <span class="hljs-number">2</span>
+        ) );
+
+        $fourth_page = file_get_contents( WPG_PATH . <span class="hljs-string">'/pages/fourth-page.html'</span>, <span class="hljs-keyword">true</span> );
+        wp_insert_post( <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'post_type'</span>     =&gt; <span class="hljs-string">'page'</span>,
+          <span class="hljs-string">'post_title'</span>    =&gt; <span class="hljs-string">'Fourth Child'</span>,
+          <span class="hljs-string">'post_content'</span>  =&gt; $fourth_page,
+          <span class="hljs-string">'post_status'</span>   =&gt; <span class="hljs-string">'publish'</span>,
+          <span class="hljs-string">'post_slug'</span>     =&gt; <span class="hljs-string">'fourth-child'</span>,
+          <span class="hljs-string">'post_parent'</span>   =&gt;  $parent_id,
+          <span class="hljs-string">'menu_order'</span>    =&gt;  <span class="hljs-number">3</span>
+        ) );
+      }
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create_demo_posts</span><span class="hljs-params">()</span> </span>{
+
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Create test menus and registered them to twentyfifteen menu locations.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create_demo_menus</span><span class="hljs-params">()</span> </span>{
+      $menu_name = <span class="hljs-string">'Primary'</span>;
+      $menu_exists = wp_get_nav_menu_object( $menu_name );
+
+      <span class="hljs-keyword">if</span> ( ! $menu_exists ) {
+        $primary_id = wp_create_nav_menu($menu_name);
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<p>Set up default menu items</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        $posts = get_posts( <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'name'</span>        =&gt; <span class="hljs-string">'hello-world'</span>,
+          <span class="hljs-string">'post_type'</span>   =&gt; <span class="hljs-string">'post'</span>,
+          <span class="hljs-string">'post_status'</span> =&gt; <span class="hljs-string">'publish'</span>,
+          <span class="hljs-string">'numberposts'</span> =&gt; <span class="hljs-number">1</span>
+        ) );
+        <span class="hljs-keyword">if</span> ( $posts ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'Home'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'post'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $posts[<span class="hljs-number">0</span>]-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'about-twenty-fifteen'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'About Twenty Fifteen'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'readability'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'Readability'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'image-alignment-and-styles'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'Image Alignment and Styles'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'html-elements'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'HTML Elements'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'a-parent-page'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          $parent_item_id = wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'A Parent Page'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'a-parent-page/first-child'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'First Page'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>,
+            <span class="hljs-string">'menu-item-parent-id'</span> =&gt; $parent_item_id,
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'a-parent-page/second-child'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'Second Page'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>,
+            <span class="hljs-string">'menu-item-parent-id'</span> =&gt; $parent_item_id,
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'a-parent-page/third-child'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'The Third'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>,
+            <span class="hljs-string">'menu-item-parent-id'</span> =&gt; $parent_item_id,
+          ));
+        }
+
+        $page = get_page_by_path(<span class="hljs-string">'a-parent-page/fourth-child'</span>);
+        <span class="hljs-keyword">if</span> ( $page ) {
+          wp_update_nav_menu_item($primary_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+            <span class="hljs-string">'menu-item-title'</span>     =&gt; __(<span class="hljs-string">'And The Fourth'</span>),
+            <span class="hljs-string">'menu-item-object'</span>    =&gt; <span class="hljs-string">'page'</span>,
+            <span class="hljs-string">'menu-item-object-id'</span> =&gt; $page-&gt;ID,
+            <span class="hljs-string">'menu-item-type'</span>      =&gt; <span class="hljs-string">'post_type'</span>,
+            <span class="hljs-string">'menu-item-status'</span>    =&gt; <span class="hljs-string">'publish'</span>,
+            <span class="hljs-string">'menu-item-parent-id'</span> =&gt; $parent_item_id,
+          ));
+        }
+      }
+
+      $menu_name = <span class="hljs-string">'Social'</span>;
+      $menu_exists = wp_get_nav_menu_object( $menu_name );
+
+      <span class="hljs-keyword">if</span> ( ! $menu_exists ) {
+        $social_id = wp_create_nav_menu( $menu_name );
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<p>Set up default menu items</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        wp_update_nav_menu_item($social_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'menu-item-title'</span>   =&gt; __(<span class="hljs-string">'Facebook'</span>),
+          <span class="hljs-string">'menu-item-classes'</span> =&gt; <span class="hljs-string">'facebook'</span>,
+          <span class="hljs-string">'menu-item-url'</span>     =&gt; <span class="hljs-string">'https://facebook.com'</span>,
+          <span class="hljs-string">'menu-item-status'</span>  =&gt; <span class="hljs-string">'publish'</span>
+        ));
+
+        wp_update_nav_menu_item($social_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'menu-item-title'</span>   =&gt; __(<span class="hljs-string">'Twitter'</span>),
+          <span class="hljs-string">'menu-item-classes'</span> =&gt; <span class="hljs-string">'twitter'</span>,
+          <span class="hljs-string">'menu-item-url'</span>     =&gt; <span class="hljs-string">'https://twitter.com'</span>,
+          <span class="hljs-string">'menu-item-status'</span>  =&gt; <span class="hljs-string">'publish'</span>
+        ));
+
+        wp_update_nav_menu_item($social_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'menu-item-title'</span>   =&gt; __(<span class="hljs-string">'GitHub'</span>),
+          <span class="hljs-string">'menu-item-classes'</span> =&gt; <span class="hljs-string">'github'</span>,
+          <span class="hljs-string">'menu-item-url'</span>     =&gt; <span class="hljs-string">'https://github.com'</span>,
+          <span class="hljs-string">'menu-item-status'</span>  =&gt; <span class="hljs-string">'publish'</span>
+        ));
+
+        wp_update_nav_menu_item($social_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'menu-item-title'</span>   =&gt; __(<span class="hljs-string">'LinkedIn'</span>),
+          <span class="hljs-string">'menu-item-classes'</span> =&gt; <span class="hljs-string">'linkedin'</span>,
+          <span class="hljs-string">'menu-item-url'</span>     =&gt; <span class="hljs-string">'https://linkedin.com'</span>,
+          <span class="hljs-string">'menu-item-status'</span>  =&gt; <span class="hljs-string">'publish'</span>
+        ));
+
+        wp_update_nav_menu_item($social_id, <span class="hljs-number">0</span>, <span class="hljs-keyword">array</span>(
+          <span class="hljs-string">'menu-item-title'</span>   =&gt; __(<span class="hljs-string">'Wordpress'</span>),
+          <span class="hljs-string">'menu-item-classes'</span> =&gt; <span class="hljs-string">'wordpress'</span>,
+          <span class="hljs-string">'menu-item-url'</span>     =&gt; <span class="hljs-string">'https://wordpress.org'</span>,
+          <span class="hljs-string">'menu-item-status'</span>  =&gt; <span class="hljs-string">'publish'</span>
+        ));
+
+      }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<p>Set menu locations</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">      $locations = <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">'primary'</span> =&gt; $primary_id,
+        <span class="hljs-string">'social'</span> =&gt; $social_id
+      );
+
+      set_theme_mod( <span class="hljs-string">'nav_menu_locations'</span>, $locations );
+    }
+  }
+<span class="hljs-meta">?&gt;</span>
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

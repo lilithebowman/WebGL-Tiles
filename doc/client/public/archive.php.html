@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>archive.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "client\\public\\archive.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>archive.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>The template for displaying archive pages</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">
+get_header(); ?&gt;
+
+	&lt;main id="primary" class="site-main"&gt;
+
+	&lt;?php
+	if ( have_posts() ) : ?&gt;
+
+		&lt;header class="page-header"&gt;
+			&lt;?php
+				the_archive_title( '&lt;h1 class="page-title"&gt;', '&lt;/h1&gt;' );
+				the_archive_description( '&lt;div class="archive-description"&gt;', '&lt;/div&gt;' );
+			?&gt;
+		&lt;/header&gt;&lt;!-- .page-header --&gt;
+
+		&lt;?php
+		/* Start the Loop */
+		while ( have_posts() ) : the_post();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Include the Post-Format-specific template for the content.
+If you want to override this in a child theme, then include a file
+called content-___.php (where ___ is the Post Format name) and that will be used instead.</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			get_template_part( <span class="hljs-string">'template-parts/content'</span>, get_post_format() );
+
+		<span class="hljs-keyword">endwhile</span>;
+
+		the_posts_navigation();
+
+	<span class="hljs-keyword">else</span> :
+
+		get_template_part( <span class="hljs-string">'template-parts/content'</span>, <span class="hljs-string">'none'</span> );
+
+	<span class="hljs-keyword">endif</span>; <span class="hljs-meta">?&gt;</span>
+
+	&lt;/main&gt;&gt;&lt;!-- <span class="hljs-comment">#primary --&gt;</span>
+
+<span class="hljs-meta">&lt;?php</span>
+get_footer();
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

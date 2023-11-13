@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ThemeModsMutation.php</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../../../../../../doc-style.css" />
+  <script src="../../../../../../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../../../../../../";
+    var thisFile = "client\\public\\inc\\wp-graphql-types\\Types\\ThemeMods\\Mutation\\ThemeModsMutation.php";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../../../../../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>ThemeModsMutation.php</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>\<span class="hljs-title">Mutation</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Error</span>\<span class="hljs-title">UserError</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">Definition</span>\<span class="hljs-title">ResolveInfo</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">GraphQLRelay</span>\<span class="hljs-title">Relay</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">AppContext</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Data</span>\<span class="hljs-title">DataSource</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">WPInputObjectType</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Type</span>\<span class="hljs-title">ThemeMods</span>\<span class="hljs-title">ThemeModsFields</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">WPGraphQL</span>\<span class="hljs-title">Types</span>;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Class ThemeModsMutation</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThemeModsMutation</span> </span>{
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Holds the input_fields configuration</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $input_fields = [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the background input object</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $background_input;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the header image input object</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $header_image_input;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Stores the nav menu locations input object</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> $nav_menu_locations_input;
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<div class="dox">
+<div class="summary">
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>mixed|array|null $input_fields
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">input_fields</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$input_fields ) ) {
+			$input_fields = [
+        <span class="hljs-string">'background'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; <span class="hljs-keyword">self</span>::background_input(),
+        ],
+        <span class="hljs-string">'backgroundColor'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::string(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background-color" hex color code'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'customCssPostId'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::int(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "custom-css-post-id" post id'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+				],
+				<span class="hljs-string">'customLogo'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; Types::int(),
+					<span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "custom-logo" attachment id'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'headerImage'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; <span class="hljs-keyword">self</span>::header_image_input(),
+        ],
+				<span class="hljs-string">'navMenuLocations'</span>      =&gt; [
+					<span class="hljs-string">'type'</span>        =&gt; <span class="hljs-keyword">self</span>::nav_menu_locations_input(),
+				],
+			];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filters the mutation input fields for the object type</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$input_fields The array of input fields
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">			<span class="hljs-keyword">self</span>::$input_fields = apply_filters( <span class="hljs-string">'graphql_theme_mods_input_fields'</span>, $input_fields );
+		}
+
+		<span class="hljs-keyword">return</span> ( ! <span class="hljs-keyword">empty</span>( <span class="hljs-keyword">self</span>::$input_fields ) ) ? <span class="hljs-keyword">self</span>::$input_fields : <span class="hljs-keyword">null</span>;
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns the BackgroundInput definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>WPInputObjectType
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">background_input</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$background_input ?: <span class="hljs-keyword">self</span>::$background_input = <span class="hljs-keyword">new</span> WPInputObjectType( [
+      <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'BackgroundInput'</span>,
+      <span class="hljs-string">'fields'</span> =&gt; [
+        <span class="hljs-string">'imageId'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::id(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background"\'s image attachment id'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'preset'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background"\'s preset property'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'size'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background"\'s css background-size property'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'repeat'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background"\'s css background-repeat property'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'attachment'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "background"\'s css background-attachement property'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+      ],
+    ] );
+
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns the HeaderImageInput definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>WPInputObjectType
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">header_image_input</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$header_image_input ?: <span class="hljs-keyword">self</span>::$header_image_input = <span class="hljs-keyword">new</span> WPInputObjectType( [
+      <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'HeaderImageInput'</span>,
+      <span class="hljs-string">'fields'</span> =&gt; [
+        <span class="hljs-string">'imageId'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::id(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "header-image"\'s image attachment id'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'thumbnailUrl'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::string(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "header-image"\'s thumbnail url'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'height'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::int(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "header-image"\'s display width in pixels'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+        <span class="hljs-string">'width'</span> =&gt; [
+          <span class="hljs-string">'type'</span>        =&gt; Types::int(),
+          <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The theme mod "header-image"\'s display height in pixels'</span>, <span class="hljs-string">'wp-graphql'</span> ),
+        ],
+      ]
+    ] );
+    
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Returns the NavMenuLocationsInput definition</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>WPInputObjectType|null
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nav_menu_locations_input</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>::$nav_menu_locations_input ?: <span class="hljs-keyword">self</span>::$nav_menu_locations_input = <span class="hljs-keyword">new</span> WPInputObjectType( [
+      <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'NavMenuLocationsInput'</span>,
+      <span class="hljs-string">'fields'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Get nav menu locations</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">        $locations = DataSource::get_registered_nav_menu_locations();
+
+        $fields = [];
+        <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $locations ) ) {
+          <span class="hljs-keyword">foreach</span>( $locations <span class="hljs-keyword">as</span> $location ) {
+            $fields[ $location ] = [
+              <span class="hljs-string">'type'</span> =&gt; Types::int(),
+              <span class="hljs-string">'description'</span> =&gt; __( <span class="hljs-string">'The WP ID of the nav menu to be assigned to %s'</span>, <span class="hljs-string">'wp-graphql'</span>, $location ),
+            ];
+          }
+        }
+
+        <span class="hljs-keyword">return</span> $fields;
+      },
+    ] );
+
+  }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>This handles inserting the comment and creating</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$input The input for the mutation
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$mutation_name The name of the mutation being performed
+</span>
+</div>
+<div class="dox_tag_title">Returns</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name"></span>
+<span>array $output_args
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepare_theme_mods_values</span><span class="hljs-params">( $input, $mutation_name )</span> </span>{
+		
+    $prepared_values = [];
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Scalar Inputs</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		<span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'backgroundColor'</span>] ) ) {
+			$prepared_values[<span class="hljs-string">'background_color'</span>] = $input[<span class="hljs-string">'backgroundColor'</span>];
+    }
+    <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'customCssPostId'</span>] ) ) {
+			$prepared_values[<span class="hljs-string">'custom_css_post_id'</span>] = $input[<span class="hljs-string">'customCssPostId'</span>];
+    }
+    <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'customLogo'</span>] ) ) {
+			$prepared_values[<span class="hljs-string">'custom_logo'</span>] = $input[<span class="hljs-string">'customLogo'</span>];
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Complex Inputs</p>
+</div>
+<div class="body">
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">    <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'background'</span>] ) &amp;&amp; is_array( $input[<span class="hljs-string">'background'</span>] ) ) {
+      <span class="hljs-keyword">foreach</span>( $input[<span class="hljs-string">'background'</span>] <span class="hljs-keyword">as</span> $key =&gt; $value ) {
+        <span class="hljs-keyword">switch</span>( $key ) {
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'imageId'</span>:
+            $value_key = <span class="hljs-string">'background_image'</span>;
+            $prepared_values[ $value_key ] = wp_get_attachment_url( $value );
+            <span class="hljs-keyword">break</span>;
+          <span class="hljs-keyword">default</span>: 
+            $value_key = <span class="hljs-string">'background_'</span>. preg_replace( <span class="hljs-string">'/([A-Z])/'</span>, <span class="hljs-string">'_\\L$1'</span>, $key );
+            $prepared_values[ $value_key ] = $value;
+        }
+      }
+    }
+
+    <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'headerImage'</span>] ) &amp;&amp; is_array( $input[<span class="hljs-string">'headerImage'</span>] ) ) {
+
+      $data_key = <span class="hljs-string">'header_image_data'</span>;
+      <span class="hljs-keyword">foreach</span>( $input[<span class="hljs-string">'headerImage'</span>] <span class="hljs-keyword">as</span> $key =&gt; $value ) {
+        <span class="hljs-keyword">switch</span>( $key ) {
+          <span class="hljs-keyword">case</span> <span class="hljs-string">'imageId'</span>:
+            $url = wp_get_attachment_url( $value );
+            $value_key = <span class="hljs-string">'header_image'</span>;
+            $prepared_values[ $value_key ] = $url;
+
+            <span class="hljs-keyword">if</span>( <span class="hljs-keyword">empty</span>( $prepared_values[ $data_key ] ) ) {
+              $prepared_values[ $data_key ] = get_theme_mod( $data_key, <span class="hljs-keyword">new</span> \stdClass );
+            }
+            $prepared_values[ $data_key ]-&gt;url = $url;
+            <span class="hljs-keyword">break</span>;
+
+          <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">if</span>( <span class="hljs-keyword">empty</span>( $prepared_values[ $data_key ] ) ) {
+              $prepared_values[ $data_key ] = get_theme_mod( $data_key, <span class="hljs-keyword">new</span> \stdClass );
+            }
+            $value_name = <span class="hljs-string">'background_'</span>. preg_replace( <span class="hljs-string">'/([A-Z])/'</span>, <span class="hljs-string">'_\\L$1'</span>, $name );
+            $prepared_values[ $data_key ]-&gt;$value_name = $value;
+
+        }
+      }
+    }
+
+    <span class="hljs-keyword">if</span> ( ! <span class="hljs-keyword">empty</span>( $input[<span class="hljs-string">'navMenuLocations'</span>] ) &amp;&amp; is_array( $input[<span class="hljs-string">'navMenuLocations'</span>] ) ) {
+      $prepared_values[ <span class="hljs-string">'nav_menu_locations'</span> ] = $input[<span class="hljs-string">'navMenuLocations'</span>];
+    }
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16"></a>
+</div>
+<div class="dox">
+<div class="summary">
+<p>Filter the $theme_mods_update_values</p>
+</div>
+<div class="body">
+</div>
+<div class="details">
+<div class="dox_tag_title">Params</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$prepared_values The array of theme mods values that will be passed to set_theme_mod
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">array</span>
+<span>$input The data that was entered as input for the mutation
+</span>
+</div>
+<div class="dox_tag_detail">
+<span class="dox_tag_name">string</span>
+<span>$mutation_type The type of mutation being performed ( create, edit, etc )
+</span>
+</div>
+</div>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="php">		$prepared_values = apply_filters( <span class="hljs-string">'graphql_theme_mods_update_values'</span>, $prepared_values, $input, $mutation_name );
+
+		<span class="hljs-keyword">return</span> $prepared_values;
+	}
+  
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
