@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import { BrowserView } from 'react-device-detect';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import { BrowserView } from "react-device-detect";
+import { Container, Row, Col } from "react-bootstrap";
 
 const BODY_QUERY = gql`
   query AppQuery {
@@ -13,11 +13,11 @@ const BODY_QUERY = gql`
       generalSettingsDescription
     }
     themeMods {
-      customLogo{
+      customLogo {
         altText
         sourceUrl
-        mediaDetails{
-          sizes{
+        mediaDetails {
+          sizes {
             name
             sourceUrl
           }
@@ -51,8 +51,8 @@ class Body extends Component {
       <Container fluid className="app-body">
         <Query query={BODY_QUERY}>
           {({ data, error, loading }) => {
-            if (loading) return (<Loading />);
-            if (error) return (<Error fault="query" debugMsg={error.message} />);
+            if (loading) return <Loading />;
+            if (error) return <Error fault="query" debugMsg={error.message} />;
             if (data) {
               const {
                 allSettings: {
@@ -60,9 +60,9 @@ class Body extends Component {
                   generalSettingsDescription: description,
                   homeUrl: url,
                 },
-                themeMods: { customLogo: logo }
+                themeMods: { customLogo: logo },
               } = data;
-              const root = (customizr) ? '/customizer' : '';
+              const root = customizr ? "/customizer" : "";
 
               return (
                 <Row>
@@ -71,18 +71,18 @@ class Body extends Component {
                       location="primary"
                       wrapper={Col}
                       wrapperCSS="primary-menu"
-                      wrapperProps={{ xs: 'auto' }}
+                      wrapperProps={{ xs: "auto" }}
                       pills
                       vertical
                       {...{ root, siteUrl: url }}
                     />
-                    
+
                     <Login
                       {...appUserProps}
                       wrapper="div"
                       wrapperCSS="login w-100"
                     />
-                    
+
                     <BrowserView renderWithFragment>
                       <Sidebar
                         id="sidebar-1"
@@ -90,12 +90,12 @@ class Body extends Component {
                         className="sidebar w-100"
                       />
                     </BrowserView>
-                    
+
                     <Menu
                       location="social"
                       wrapper={Col}
                       wrapperCSS="social-menu w-100"
-                      wrapperProps={{ xs: 'auto' }}
+                      wrapperProps={{ xs: "auto" }}
                       justified
                       {...{ root, siteUrl: url }}
                     />
@@ -121,6 +121,6 @@ Body.propTypes = {
 
 Body.defaultProps = {
   customizr: false,
-}
+};
 
 export default Body;
