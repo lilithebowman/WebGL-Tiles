@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col } from 'bootstrap';
+import { Col } from 'react-bootstrap';
 
 import Footer from './footer';
 import Header from './header';

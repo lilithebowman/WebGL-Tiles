@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Col } from 'bootstrap';
+import { Col } from 'react-bootstrap';
 
 import { WPTemplates } from 'components/';
 

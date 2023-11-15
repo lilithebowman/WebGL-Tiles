@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { BrowserView } from 'react-device-detect';
-import { Container, Row, Col } from 'bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import { WPCore, WPRouter, WPTemplates } from './components';
 

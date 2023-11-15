@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import {
   Button, Col, Input, InputGroup,
   InputGroupButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle,
-} from 'bootstrap';
+} from 'react-bootstrap';
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core'

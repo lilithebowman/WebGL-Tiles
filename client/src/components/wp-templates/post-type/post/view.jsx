@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Link } from 'react-router-dom'
 // import { Parser as ReactParser } from 'html-to-react';
-import { Col } from 'bootstrap';
+import { Col } from 'react-bootstrap';
 
 // const parser = new ReactParser();
 

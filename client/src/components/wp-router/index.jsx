@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
-import { Col } from 'bootstrap';
+import { Col } from 'react-bootstrap';
 
 import { WPTemplates } from 'components/';
 

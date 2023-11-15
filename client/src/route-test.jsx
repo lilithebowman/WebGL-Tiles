@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
-import { Nav, Container, Row } from 'bootstrap';
+import { Nav, Container, Row } from 'react-bootstrap';
 
 class RouteTest extends Component {
   constructor(props) {

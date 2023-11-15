@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import _ from 'lodash';
 import { Query } from 'react-apollo';
-import { Col } from 'bootstrap';
+import { Col } from 'react-bootstrap';
 
 import { Error, Loading } from 'components/wp-templates';
 import View from './view';

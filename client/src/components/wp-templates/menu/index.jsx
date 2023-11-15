@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle,
   Nav, NavItem, NavLink as ExtLink, ButtonGroup,
-} from 'bootstrap';
+} from 'react-bootstrap';
 import { Query } from 'react-apollo';
 
 // FontAwesome
