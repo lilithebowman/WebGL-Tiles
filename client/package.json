@@ -46,7 +46,7 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run --openssl-legacy-provider build-css && react-scripts build",
-    "build-css": "sass src/scss/ src/",
+    "build-css": "# sass src/scss/ src/",
     "watch-css": "npm run build-css && sass src/scss/ src/ -w",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

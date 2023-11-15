@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { WPCustomizr } from './components';
 import Body from './body';
 
 import './app.css';
@@ -50,16 +49,14 @@ class App extends Component {
     return (
       <Switch>
         <Route path="/:customizr(customizr)" render={({ match: { params } }) => (
-          <WPCustomizr>
-            <Body
-              appUserProps={{
-                clearCurrentUser: this.clearCurrentUser,
-                customizr: true,
-                setCurrentUser: this.setCurrentUser,
-                loggedIn,
-              }}
-            />
-          </WPCustomizr>
+			<Body
+				appUserProps={{
+				clearCurrentUser: this.clearCurrentUser,
+				customizr: true,
+				setCurrentUser: this.setCurrentUser,
+				loggedIn,
+				}}
+			/>
         )} />
         <Route render={props => (
           <Body
