@@ -5,8 +5,6 @@ import gql from 'graphql-tag';
 import { BrowserView } from 'react-device-detect';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { WPCore, WPRouter, WPTemplates } from './components';
-
 const BODY_QUERY = gql`
   query AppQuery {
     allSettings {
@@ -53,8 +51,8 @@ class Body extends Component {
       <Container fluid className="app-body">
         <Query query={BODY_QUERY}>
           {({ data, error, loading }) => {
-            if (loading) return (<WPTemplates.Loading />);
-            if (error) return (<WPTemplates.Error fault="query" debugMsg={error.message} />);
+            if (loading) return (<Loading />);
+            if (error) return (<Error fault="query" debugMsg={error.message} />);
             if (data) {
               const {
                 allSettings: {
@@ -68,8 +66,8 @@ class Body extends Component {
 
               return (
                 <Row>
-                  <WPCore.Header {...{ logo, description, title, url }}>
-                    <WPTemplates.Menu
+                  <Header {...{ logo, description, title, url }}>
+                    <Menu
                       location="primary"
                       wrapper={Col}
                       wrapperCSS="primary-menu"
@@ -79,21 +77,21 @@ class Body extends Component {
                       {...{ root, siteUrl: url }}
                     />
                     
-                    <WPTemplates.Login
+                    <Login
                       {...appUserProps}
                       wrapper="div"
                       wrapperCSS="login w-100"
                     />
                     
                     <BrowserView renderWithFragment>
-                      <WPTemplates.Sidebar
+                      <Sidebar
                         id="sidebar-1"
                         as={Col}
                         className="sidebar w-100"
                       />
                     </BrowserView>
                     
-                    <WPTemplates.Menu
+                    <Menu
                       location="social"
                       wrapper={Col}
                       wrapperCSS="social-menu w-100"
@@ -101,11 +99,11 @@ class Body extends Component {
                       justified
                       {...{ root, siteUrl: url }}
                     />
-                  </WPCore.Header>
-                  <WPCore.Main>
-                    <WPRouter {...{ root }} />
-                    <WPCore.Footer />
-                  </WPCore.Main>
+                  </Header>
+                  <Main>
+                    <Router {...{ root }} />
+                    <Footer />
+                  </Main>
                 </Row>
               );
             }
