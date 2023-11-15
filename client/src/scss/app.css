@@ -14508,13 +14508,10 @@ blockquote {
  *
  **********************************************/
 #page, #root {
-  opacity: 0;
   overflow-x: hidden;
-  transition: opacity ease-out 350ms;
-
-  &.loaded {
-	opacity: 1;
-  }
+}
+#page.loaded, #root.loaded {
+  opacity: 1;
 }
 #page .app-body, #root .app-body {
   min-height: 100vh;

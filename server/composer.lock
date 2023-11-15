@@ -254,7 +254,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-graphql/wp-graphql.git",
-                "reference": "b3b83e7817a14a6b8ee39e0bb6b04fb4b55207f4"
+                "reference": "6142a5865ec97a37e16a225a2684e7bee7cce161"
             },
             "require": {
                 "appsero/client": "1.2.1",
@@ -367,7 +367,7 @@
                 }
             ],
             "description": "GraphQL API for WordPress",
-            "time": "2023-11-09T22:41:23+00:00"
+            "time": "2023-11-14T22:58:50+00:00"
         },
         {
             "name": "wp-graphql/wp-graphql-jwt-authentication",
@@ -442,5 +442,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
