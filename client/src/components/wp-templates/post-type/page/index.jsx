@@ -25,6 +25,7 @@ class Page extends Component {
             const { title, content } = page || pageBy;
             return (
               <Col className="post page">
+				<div className="entry-title hidden">{title}</div>
                 <div className="entry-content">{content}</div>
               </Col>
             );

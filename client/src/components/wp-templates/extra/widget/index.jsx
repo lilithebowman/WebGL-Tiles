@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Container, Row } from 'bootstrap';

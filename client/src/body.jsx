@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withApollo, Query } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { BrowserView } from 'react-device-detect';
 import { Container, Row, Col } from 'bootstrap';
@@ -29,14 +29,14 @@ const BODY_QUERY = gql`
   }
 `;
 
-const TOKEN_REFRESH_MUTATION = gql`
-  mutation RefreshToken($clientId: String!, $authToken: String!){
-    refreshJwtAuthToken(input: { clientMutationId: $clientId, jwtRefreshToken: $authToken }){
-      clientMutationId
-      authToken
-    }
-  }
-`;
+// const TOKEN_REFRESH_MUTATION = gql`
+//   mutation RefreshToken($clientId: String!, $authToken: String!){
+//     refreshJwtAuthToken(input: { clientMutationId: $clientId, jwtRefreshToken: $authToken }){
+//       clientMutationId
+//       authToken
+//     }
+//   }
+// `;
 
 /**
  * App Body Component

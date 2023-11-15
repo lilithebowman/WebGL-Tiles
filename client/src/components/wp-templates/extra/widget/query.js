@@ -47,7 +47,10 @@ const getFields = type => {
       return 'title text filterText visual';
 
     case 'VideoWidget':
-      return 'title loop preload video'
+      return 'title loop preload video';
+
+	default:
+		return;
   }
 }
 
