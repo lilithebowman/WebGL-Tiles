@@ -106,7 +106,7 @@ class PostView extends Component {
     );
 
     return (
-      <div tag="article" id={`post-${postId}`} className="post">
+      <div tag="article" id={`post-${postId}`} className="post col-3">
         <Featured />
         <header className="entry-header">
           <Title />
