@@ -13,7 +13,7 @@ class Post extends Component {
     const { id, slug, root } = this.props;
     return (
       <Query {...getQueryProps({id, slug})}>
-        {({ data, loading, error, refetch }) => {
+        {({ data, loading, error }) => {
           if (loading) return (<Loading as={Col} />);
           if (error) return (<Error fault="query" debugMsg={error.message} as={Col} className="post" />);
 
