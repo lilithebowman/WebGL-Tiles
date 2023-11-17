@@ -79,13 +79,13 @@ fail. You can logout of Docker with the following command:</p>
       <span class="hljs-attr">WORDPRESS_DB_USER:</span> <span class="hljs-string">"root"</span>
       <span class="hljs-attr">WORDPRESS_DEBUG:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">WORDPRESS_CONFIG_EXTRA:</span> <span class="hljs-string">|
-        define( 'WP_DEFAULT_THEME', 'dev-theme' );
+        define( 'WP_DEFAULT_THEME', 'wpgraphql-theme' );
 </span>
     <span class="hljs-attr">networks:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">"dev"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"wpgraphql"</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">"./client/build:/var/www/html/wp-content/themes/wpgraphql-theme"</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">"./client/public:/var/www/html/wp-content/themes/dev-theme"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./client/public:/var/www/html/wp-content/themes/wpgraphql-theme"</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/vendor/wp-graphql/wp-graphiql:/var/www/html/wp-content/plugins/wp-graphiql"</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/vendor/wp-graphql/wp-graphql:/var/www/html/wp-content/plugins/wp-graphql"</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">"./server/src:/var/www/html/wp-content/plugins/wpgraphql-settings"</span>

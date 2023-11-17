@@ -117,8 +117,8 @@
 			array(
 				'primary' => __( 'Primary Menu' ),
 				'social' => __( 'Social Links Menu' )
-			 )
-		 );
+			)
+		);
 
 		 	// Adding support for core block visual styles.
 			add_theme_support( 'wp-block-styles' );
@@ -150,8 +150,8 @@
 				),
 			) );
 
-	 }
-	 add_action( 'after_setup_theme', 'twentyfifteen_setup' );
+	}
+	add_action( 'after_setup_theme', 'twentyfifteen_setup' );
 
 	/**
 	 * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -220,16 +220,29 @@
 			wp_enqueue_style( 'gutenbergtheme-fonts', gutenbergtheme_fonts_url() );
 		}
 
+
 		if( file_exists( get_template_directory() . '/asset-manifest.json' ) ) {
 			$assets = json_decode( file_get_contents( get_template_directory() . '/asset-manifest.json' ), true );
 			
 			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['main.css'] );
 			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['main.js'], array(), THEME_VERSION, true );
+		} elseif( file_exists( get_template_directory() . '/../wpgraphql-theme/asset-manifest.json' ) ) {
+			$newdir = get_template_directory() . '/../wpgraphql-theme/';
+			var_dump(scandir(get_template_directory()));
+			$assets = json_decode( file_get_contents( $newdir . '/asset-manifest.json' ), true );
+			if (count($assets) > 0 && array_key_exists('files', $assets)) {
+				$files = $assets['files'];
+				wp_enqueue_style( 'main-style', $newdir . $files['main.css'] );
+				wp_enqueue_script( 'twentyfifteen-react-script', $newdir . $files['main.js'], array(), THEME_VERSION, true );
+			} else {
+				echo '<pre class="error">Error: Unable to parse asset-manifest.json</pre>';
+			}
 		} else {
-			echo "<error>Error: Unable to enqueue scripts</error>";
+			echo "<pre>";
+			var_dump(WP_DEFAULT_THEME);
+			echo "</pre>";
 			wp_enqueue_style( 'gutenbergtheme-style', get_template_directory_uri() . '/css/main.css' );
 			wp_enqueue_style( 'gutenbergthemeblocks-style', get_template_directory_uri() . '/css/blocks.css' );
-		
 		}
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -253,13 +266,8 @@
 	 * Functions which enhance the theme by hooking into WordPress.
 	 */
 	require get_template_directory() . '/inc/template-functions.php';
-	
-	/**
-   * Adds Customizr settings
-   */
-  require get_template_directory() . '/inc/stylist.php';
 
-  /**
+	/**
    * Adds GraphQL schema modifications
    */
 	require get_template_directory() . '/inc/wp-graphql.php';

@@ -47,7 +47,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run --openssl-legacy-provider build-js && build-css",
     "build-css": "sass src/scss/ src/",
-	"build-js": "react-scripts build && copy-js",
+	"build-js": "react-scripts build",
 	"copy-js": "mkdir build/js && cp build/static/js/main.*.js build/js/main.js",
     "watch-css": "npm run build-css && sass src/scss/ src/ -w",
     "test": "react-scripts test --env=jsdom",
