@@ -237,7 +237,6 @@ $template_directory = get_template_directory();
 					$display)
 			) {
 				if( file_exists( $file ) ) {
-					echo '<pre>' . $file . '</pre>';
 					wp_enqueue_script( 'twentyfifteen-react-script', $file);
 				}
 			}
@@ -258,7 +257,6 @@ $template_directory = get_template_directory();
 					$display)
 			) {
 				if( file_exists( $file ) ) {
-					echo '<pre>' . $file . '</pre>';
 					wp_enqueue_style('main-style', $file);
 				}
 			}
