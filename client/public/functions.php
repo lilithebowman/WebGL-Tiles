@@ -248,11 +248,11 @@ $template_directory = get_template_directory();
 		} elseif( count( $asset_json_file ) > 0 && file_exists( $asset_json_file ) ) {
 			$newdir = strtok($asset_json_file[0], 'asset-manifest.json')[0];
 			$assets = json_decode( file_get_contents( $asset_json_file[0] ), true );
-			
+
 			echo '<pre class="error">';
 			var_dump($assets);
 			echo '</pre>';
-			
+
 			if (count($assets) > 0 && array_key_exists('files', $assets)) {
 				$files = $assets['files'];
 				wp_enqueue_style( 'main-style', $newdir . $files['main.css'] );
