@@ -261,8 +261,8 @@ $template_directory = get_template_directory();
 		if( file_exists( get_template_directory() . '/asset-manifest.json' ) ) {
 			$assets = json_decode( file_get_contents( get_template_directory() . '/asset-manifest.json' ), true );
 			
-			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['main.css'] );
-			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['main.js'], array(), THEME_VERSION, true );
+			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['files']['main.css'] );
+			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['files']['main.js'], array(), THEME_VERSION, true );
 		} else {
 			wp_enqueue_style( 'gutenbergtheme-style', get_template_directory_uri() . '/css/main.css' );
 			wp_enqueue_style( 'gutenbergthemeblocks-style', get_template_directory_uri() . '/css/blocks.css' );
