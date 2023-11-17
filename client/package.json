@@ -48,6 +48,7 @@
     "build": "npm run --openssl-legacy-provider build-js && build-css",
     "build-css": "sass src/scss/ src/",
 	"build-js": "react-scripts build && copy-asset-manifest",
+	"copy-js": "mkdir build/public && cp build/static/js/* build/public/js/",
 	"copy-asset-manifest": "cp build/asset-manifest.json public/asset-manifest.json",
     "watch-css": "npm run build-css && sass src/scss/ src/ -w",
     "test": "react-scripts test --env=jsdom",
