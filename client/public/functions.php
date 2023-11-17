@@ -221,9 +221,9 @@ $template_directory = get_template_directory();
 			wp_enqueue_style( 'gutenbergtheme-fonts', gutenbergtheme_fonts_url() );
 		}
 
-		$it = new RecursiveDirectoryIterator(get_template_directory() . '/../../');
-		$display = Array ( 'asset-manifest.json' );
-		$asset_json_file = [];
+		// Enqueue scripts
+		$it = new RecursiveDirectoryIterator(get_template_directory());
+		$display = Array ( 'js' );
 		foreach(new RecursiveIteratorIterator($it) as $file) {
 			if (@in_array(
 				@strtolower(
@@ -236,28 +236,35 @@ $template_directory = get_template_directory();
 					),
 					$display)
 			) {
-				array_push($asset_json_file, $file);
+				wp_enqueue_script( 'twentyfifteen-react-script', $file);
+			}
+		}
+		
+		// Enqueueeueueueue styles
+		$display = Array ( 'css' );
+		foreach(new RecursiveIteratorIterator($it) as $file) {
+			if (@in_array(
+				@strtolower(
+					@array_pop(
+						@explode(
+							'.',
+							$file
+							)
+						)
+					),
+					$display)
+			) {
+				wp_enqueue_style( 'main-style', $file);
 			}
 		}
 
-		if( count( $asset_json_file ) > 0 && file_exists( $asset_json_file[0] ) ) {
-			$newdir = strtok($asset_json_file[0], 'asset-manifest.json')[0];
-			$assets = json_decode( file_get_contents( $asset_json_file[0] ), true );
-
-			echo '<pre class="error">';
-			var_dump($assets);
-			echo '</pre>';
-
-			if (count($assets) > 0 && array_key_exists('files', $assets)) {
-				$files = $assets['files'];
-				wp_enqueue_style( 'main-style', $newdir . $files['main.css'] );
-				wp_enqueue_script( 'twentyfifteen-react-script', $newdir . $files['main.js'], array(), THEME_VERSION, true );
-			} else {
-				echo '<pre class="error">Error: Unable to parse asset-manifest.json</pre>';
-			}
+		if( file_exists( get_template_directory() . '/asset-manifest.json' ) ) {
+			$assets = json_decode( file_get_contents( $template_directory . '/asset-manifest.json' ), true );
+			
+			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['main.css'] );
+			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['main.js'], array(), THEME_VERSION, true );
 		} else {
 			wp_enqueue_style( 'gutenbergtheme-style', get_template_directory_uri() . '/css/main.css' );
-			wp_enqueue_script( 'gutenbergtheme-style', get_template_directory_uri() . '/js/main.js' );
 			wp_enqueue_style( 'gutenbergthemeblocks-style', get_template_directory_uri() . '/css/blocks.css' );
 		}
 
