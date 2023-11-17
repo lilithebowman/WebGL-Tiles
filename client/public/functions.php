@@ -7,6 +7,7 @@
  * @package twentyfifteen-react-apollo
  */
 
+$template_directory = get_template_directory();
 	/**
 	 * Theme Constants
 	 * 
@@ -220,16 +221,38 @@
 			wp_enqueue_style( 'gutenbergtheme-fonts', gutenbergtheme_fonts_url() );
 		}
 
+		$it = new RecursiveDirectoryIterator(get_template_directory() . '/../../');
+		$display = Array ( 'asset-manifest.json' );
+		$asset_json_file = [];
+		foreach(new RecursiveIteratorIterator($it) as $file) {
+			if (@in_array(
+				@strtolower(
+					@array_pop(
+						@explode(
+							'.',
+							$file
+							)
+						)
+					),
+					$display)
+			) {
+				array_push($asset_json_file, $file);
+			}
+		}
 
 		if( file_exists( get_template_directory() . '/asset-manifest.json' ) ) {
-			$assets = json_decode( file_get_contents( get_template_directory() . '/asset-manifest.json' ), true );
+			$assets = json_decode( file_get_contents( $template_directory . '/asset-manifest.json' ), true );
 			
 			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['main.css'] );
 			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['main.js'], array(), THEME_VERSION, true );
-		} elseif( file_exists( get_template_directory() . '/../wpgraphql-theme/asset-manifest.json' ) ) {
-			$newdir = get_template_directory() . '/../wpgraphql-theme/';
-			var_dump(scandir(get_template_directory()));
-			$assets = json_decode( file_get_contents( $newdir . '/asset-manifest.json' ), true );
+		} elseif( count( $asset_json_file ) > 0 && file_exists( $asset_json_file ) ) {
+			$newdir = strtok($asset_json_file[0], 'asset-manifest.json')[0];
+			$assets = json_decode( file_get_contents( $asset_json_file[0] ), true );
+			
+			echo '<pre class="error">';
+			var_dump($assets);
+			echo '</pre>';
+			
 			if (count($assets) > 0 && array_key_exists('files', $assets)) {
 				$files = $assets['files'];
 				wp_enqueue_style( 'main-style', $newdir . $files['main.css'] );
@@ -238,9 +261,6 @@
 				echo '<pre class="error">Error: Unable to parse asset-manifest.json</pre>';
 			}
 		} else {
-			echo "<pre>";
-			var_dump(WP_DEFAULT_THEME);
-			echo "</pre>";
 			wp_enqueue_style( 'gutenbergtheme-style', get_template_directory_uri() . '/css/main.css' );
 			wp_enqueue_style( 'gutenbergthemeblocks-style', get_template_directory_uri() . '/css/blocks.css' );
 		}
@@ -255,19 +275,19 @@
 	/**
 	 * Implement the Custom Header feature.
 	 */
-	require get_template_directory() . '/inc/custom-header.php';
+	require $template_directory . '/inc/custom-header.php';
 
 	/**
 	 * Custom template tags for this theme.
 	 */
-	require get_template_directory() . '/inc/template-tags.php';
+	require $template_directory . '/inc/template-tags.php';
 
 	/**
 	 * Functions which enhance the theme by hooking into WordPress.
 	 */
-	require get_template_directory() . '/inc/template-functions.php';
+	require $template_directory . '/inc/template-functions.php';
 
 	/**
    * Adds GraphQL schema modifications
    */
-	require get_template_directory() . '/inc/wp-graphql.php';
+	require $template_directory . '/inc/wp-graphql.php';
