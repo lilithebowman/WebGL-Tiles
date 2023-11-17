@@ -226,7 +226,7 @@
 			wp_enqueue_style( 'main-style', get_template_directory_uri() . '/' . $assets['main.css'] );
 			wp_enqueue_script( 'twentyfifteen-react-script', get_template_directory_uri() . '/' . $assets['main.js'], array(), THEME_VERSION, true );
 		} else {
-
+			echo "<error>Error: Unable to enqueue scripts</error>";
 			wp_enqueue_style( 'gutenbergtheme-style', get_template_directory_uri() . '/css/main.css' );
 			wp_enqueue_style( 'gutenbergthemeblocks-style', get_template_directory_uri() . '/css/blocks.css' );
 		
