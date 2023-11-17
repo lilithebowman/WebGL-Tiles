@@ -45,11 +45,11 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run --openssl-legacy-provider build-js && build-css",
+    "build": "npm run --openssl-legacy-provider build-js && build-css && copy-js && copy-asset-manifest",
     "build-css": "sass src/scss/ src/",
-	"build-js": "react-scripts build && copy-asset-manifest",
 	"copy-js": "mkdir build/public && cp build/static/js/* build/public/js/",
 	"copy-asset-manifest": "cp build/asset-manifest.json public/asset-manifest.json",
+	"build-js": "react-scripts build",
     "watch-css": "npm run build-css && sass src/scss/ src/ -w",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
