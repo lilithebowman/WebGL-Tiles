@@ -208,6 +208,10 @@ $template_directory = get_template_directory();
 	}
 	add_action( 'widgets_init', 'twentyfifteen_widgets_init' );
 
+	function path2url($file, $Protocol='https://') {
+		return $Protocol.$_SERVER['HTTP_HOST'].str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
+	}
+
 	/**
 	 * Queues up theme JS and CSS files to be loaded.
 	 * 
@@ -237,7 +241,7 @@ $template_directory = get_template_directory();
 					$display)
 			) {
 				if( file_exists( $file ) ) {
-					wp_enqueue_script( 'twentyfifteen-react-script', $file);
+					wp_enqueue_script( 'twentyfifteen-react-script', path2url($file));
 				}
 			}
 		}
@@ -257,7 +261,7 @@ $template_directory = get_template_directory();
 					$display)
 			) {
 				if( file_exists( $file ) ) {
-					wp_enqueue_style('main-style', $file);
+					wp_enqueue_style('twentyfifteen-react-style', path2url($file));
 				}
 			}
 		}
